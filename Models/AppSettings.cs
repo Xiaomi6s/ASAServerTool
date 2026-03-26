@@ -70,6 +70,22 @@ namespace ASAServerTool.Models
         public bool UseForceRespawnDinos { get; set; }
         public bool DisablePvE { get; set; } // If true, Server is PvP
 
+        // Additional Gameplay Multipliers
+        public decimal CropGrowthSpeedMultiplier { get; set; }
+        public decimal PoopIntervalMultiplier { get; set; }
+        public decimal LayEggIntervalMultiplier { get; set; }
+        public decimal GlobalSpoilingTimeMultiplier { get; set; }
+        public decimal GlobalItemDecompositionTimeMultiplier { get; set; }
+        public decimal GlobalCorpseDecompositionTimeMultiplier { get; set; }
+
+        // Additional Rules
+        public bool EnableProximityChat { get; set; }
+        public bool DisableDinoDecayPvE { get; set; }
+        public bool AllowAnyoneBabyImprintCuddle { get; set; }
+        public bool PreventOfflinePvP { get; set; }
+        public bool UseCorpseLocator { get; set; }
+        public bool DisableWeatherFog { get; set; }
+
         // Auto Backup
         public bool EnableAutoBackup { get; set; }
         public int AutoBackupIntervalMinutes { get; set; }
@@ -130,6 +146,21 @@ namespace ASAServerTool.Models
             ServerCrosshair = true;
             ShowMapPlayerLocation = true;
             MaxPersonalTamedDinos = 500;
+
+            // Additional default values
+            CropGrowthSpeedMultiplier = 1.0m;
+            PoopIntervalMultiplier = 1.0m;
+            LayEggIntervalMultiplier = 1.0m;
+            GlobalSpoilingTimeMultiplier = 1.0m;
+            GlobalItemDecompositionTimeMultiplier = 1.0m;
+            GlobalCorpseDecompositionTimeMultiplier = 1.0m;
+
+            EnableProximityChat = false;
+            DisableDinoDecayPvE = false;
+            AllowAnyoneBabyImprintCuddle = false;
+            PreventOfflinePvP = false;
+            UseCorpseLocator = true;
+            DisableWeatherFog = false;
 
             // Network/Env defaults
             EnableRCON = true;

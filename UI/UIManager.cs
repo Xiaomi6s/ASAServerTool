@@ -32,6 +32,14 @@ namespace ASAServerTool.UI
         public NumericUpDown numResourceRadius;
         public NumericUpDown numResourceRespawn;
 
+        // Additional World Multipliers
+        public NumericUpDown numCropGrowth;
+        public NumericUpDown numPoopInterval;
+        public NumericUpDown numLayEggInterval;
+        public NumericUpDown numGlobalSpoilTime;
+        public NumericUpDown numGlobalItemDecomp;
+        public NumericUpDown numGlobalCorpseDecomp;
+
         // Stats
         public NumericUpDown numPlayerWaterDrain;
         public NumericUpDown numPlayerFoodDrain;
@@ -59,6 +67,14 @@ namespace ASAServerTool.UI
         public CheckBox chkServerCrosshair;
         public CheckBox chkShowMapLocation;
         public NumericUpDown numMaxTamedDinos;
+
+        // Additional Rules
+        public CheckBox chkEnableProximityChat;
+        public CheckBox chkDisableDinoDecay;
+        public CheckBox chkAllowAnyoneImprint;
+        public CheckBox chkPreventOfflinePvP;
+        public CheckBox chkUseCorpseLocator;
+        public CheckBox chkDisableWeatherFog;
 
         public CheckBox chkPvE;
         public CheckBox chkBattleEye;
@@ -271,6 +287,42 @@ namespace ASAServerTool.UI
             numResourceRadius = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             scrollPanel.Controls.Add(numResourceRadius);
             scrollPanel.Controls.Add(new Label { Text = "(越小资源离家越近)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "农作物生长速度:", Left = 20, Top = y, Width = lblWidth });
+            numCropGrowth = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
+            scrollPanel.Controls.Add(numCropGrowth);
+            scrollPanel.Controls.Add(new Label { Text = "(越大植物长得越快)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "排泄间隔倍率:", Left = 20, Top = y, Width = lblWidth });
+            numPoopInterval = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numPoopInterval);
+            scrollPanel.Controls.Add(new Label { Text = "(越小恐龙拉屎越频繁)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "下蛋间隔倍率:", Left = 20, Top = y, Width = lblWidth });
+            numLayEggInterval = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numLayEggInterval);
+            scrollPanel.Controls.Add(new Label { Text = "(越小未受精蛋下得越快)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "全局腐败时间:", Left = 20, Top = y, Width = lblWidth });
+            numGlobalSpoilTime = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numGlobalSpoilTime);
+            scrollPanel.Controls.Add(new Label { Text = "(越大肉类/果子腐坏越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "掉落物消失时间:", Left = 20, Top = y, Width = lblWidth });
+            numGlobalItemDecomp = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numGlobalItemDecomp);
+            scrollPanel.Controls.Add(new Label { Text = "(越大扔在地上的物品消失越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "尸体消失时间:", Left = 20, Top = y, Width = lblWidth });
+            numGlobalCorpseDecomp = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numGlobalCorpseDecomp);
+            scrollPanel.Controls.Add(new Label { Text = "(越大玩家/恐龙尸体存在越久)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
         }
 
         private void BuildStatsTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
@@ -408,6 +460,36 @@ namespace ASAServerTool.UI
             numMaxTamedDinos = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 1, Maximum = 10000, Value = 500 };
             scrollPanel.Controls.Add(numMaxTamedDinos);
             scrollPanel.Controls.Add(new Label { Text = "(每个部落允许拥有的最大恐龙数量)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkEnableProximityChat = new CheckBox { Text = "开启近距离语音聊天", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkEnableProximityChat);
+            scrollPanel.Controls.Add(new Label { Text = "(只有靠近的人才能听到语音)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkDisableDinoDecay = new CheckBox { Text = "关闭恐龙随时间饿死/销毁", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkDisableDinoDecay);
+            scrollPanel.Controls.Add(new Label { Text = "(PvE模式下恐龙长时间不喂食不会死亡)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkAllowAnyoneImprint = new CheckBox { Text = "允许任何人进行恐龙留痕", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkAllowAnyoneImprint);
+            scrollPanel.Controls.Add(new Label { Text = "(不仅限于孵化者，部落成员都可以抚摸)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkPreventOfflinePvP = new CheckBox { Text = "开启离线保护 (ORP)", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkPreventOfflinePvP);
+            scrollPanel.Controls.Add(new Label { Text = "(玩家离线后建筑和恐龙免疫伤害)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkUseCorpseLocator = new CheckBox { Text = "启用尸体定位光柱", Left = 20, Top = y, Width = 220, Checked = true };
+            scrollPanel.Controls.Add(chkUseCorpseLocator);
+            scrollPanel.Controls.Add(new Label { Text = "(死后尸体上方会有一道冲天光柱)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkDisableWeatherFog = new CheckBox { Text = "强制关闭天气大雾", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkDisableWeatherFog);
+            scrollPanel.Controls.Add(new Label { Text = "(服务器级别禁用起雾天气，提升视野)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
         }
 
         private void BuildBackupTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
@@ -551,6 +633,13 @@ namespace ASAServerTool.UI
             numResourceRadius.Value = settings.ResourceNoReplenishRadiusPlayers > 0 ? settings.ResourceNoReplenishRadiusPlayers : 1.0m;
             numResourceRespawn.Value = settings.ResourcesRespawnPeriodMultiplier > 0 ? settings.ResourcesRespawnPeriodMultiplier : 1.0m;
 
+            numCropGrowth.Value = settings.CropGrowthSpeedMultiplier > 0 ? settings.CropGrowthSpeedMultiplier : 1.0m;
+            numPoopInterval.Value = settings.PoopIntervalMultiplier > 0 ? settings.PoopIntervalMultiplier : 1.0m;
+            numLayEggInterval.Value = settings.LayEggIntervalMultiplier > 0 ? settings.LayEggIntervalMultiplier : 1.0m;
+            numGlobalSpoilTime.Value = settings.GlobalSpoilingTimeMultiplier > 0 ? settings.GlobalSpoilingTimeMultiplier : 1.0m;
+            numGlobalItemDecomp.Value = settings.GlobalItemDecompositionTimeMultiplier > 0 ? settings.GlobalItemDecompositionTimeMultiplier : 1.0m;
+            numGlobalCorpseDecomp.Value = settings.GlobalCorpseDecompositionTimeMultiplier > 0 ? settings.GlobalCorpseDecompositionTimeMultiplier : 1.0m;
+
             numPlayerWaterDrain.Value = settings.PlayerCharacterWaterDrainMultiplier > 0 ? settings.PlayerCharacterWaterDrainMultiplier : 1.0m;
             numPlayerFoodDrain.Value = settings.PlayerCharacterFoodDrainMultiplier > 0 ? settings.PlayerCharacterFoodDrainMultiplier : 1.0m;
             numPlayerStaminaDrain.Value = settings.PlayerCharacterStaminaDrainMultiplier > 0 ? settings.PlayerCharacterStaminaDrainMultiplier : 1.0m;
@@ -575,6 +664,13 @@ namespace ASAServerTool.UI
             chkServerCrosshair.Checked = settings.ServerCrosshair;
             chkShowMapLocation.Checked = settings.ShowMapPlayerLocation;
             numMaxTamedDinos.Value = settings.MaxPersonalTamedDinos > 0 ? settings.MaxPersonalTamedDinos : 500;
+
+            chkEnableProximityChat.Checked = settings.EnableProximityChat;
+            chkDisableDinoDecay.Checked = settings.DisableDinoDecayPvE;
+            chkAllowAnyoneImprint.Checked = settings.AllowAnyoneBabyImprintCuddle;
+            chkPreventOfflinePvP.Checked = settings.PreventOfflinePvP;
+            chkUseCorpseLocator.Checked = settings.UseCorpseLocator;
+            chkDisableWeatherFog.Checked = settings.DisableWeatherFog;
 
             chkAutoBackup.Checked = settings.EnableAutoBackup;
             numBackupInterval.Value = settings.AutoBackupIntervalMinutes > 0 ? settings.AutoBackupIntervalMinutes : 60;
@@ -616,6 +712,13 @@ namespace ASAServerTool.UI
             settings.ResourceNoReplenishRadiusPlayers = numResourceRadius.Value;
             settings.ResourcesRespawnPeriodMultiplier = numResourceRespawn.Value;
 
+            settings.CropGrowthSpeedMultiplier = numCropGrowth.Value;
+            settings.PoopIntervalMultiplier = numPoopInterval.Value;
+            settings.LayEggIntervalMultiplier = numLayEggInterval.Value;
+            settings.GlobalSpoilingTimeMultiplier = numGlobalSpoilTime.Value;
+            settings.GlobalItemDecompositionTimeMultiplier = numGlobalItemDecomp.Value;
+            settings.GlobalCorpseDecompositionTimeMultiplier = numGlobalCorpseDecomp.Value;
+
             settings.PlayerCharacterWaterDrainMultiplier = numPlayerWaterDrain.Value;
             settings.PlayerCharacterFoodDrainMultiplier = numPlayerFoodDrain.Value;
             settings.PlayerCharacterStaminaDrainMultiplier = numPlayerStaminaDrain.Value;
@@ -640,6 +743,13 @@ namespace ASAServerTool.UI
             settings.ServerCrosshair = chkServerCrosshair.Checked;
             settings.ShowMapPlayerLocation = chkShowMapLocation.Checked;
             settings.MaxPersonalTamedDinos = (int)numMaxTamedDinos.Value;
+
+            settings.EnableProximityChat = chkEnableProximityChat.Checked;
+            settings.DisableDinoDecayPvE = chkDisableDinoDecay.Checked;
+            settings.AllowAnyoneBabyImprintCuddle = chkAllowAnyoneImprint.Checked;
+            settings.PreventOfflinePvP = chkPreventOfflinePvP.Checked;
+            settings.UseCorpseLocator = chkUseCorpseLocator.Checked;
+            settings.DisableWeatherFog = chkDisableWeatherFog.Checked;
 
             settings.EnableAutoBackup = chkAutoBackup.Checked;
             settings.AutoBackupIntervalMinutes = (int)numBackupInterval.Value;

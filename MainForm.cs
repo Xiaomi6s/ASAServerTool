@@ -184,6 +184,14 @@ namespace ASAServerTool
             args += string.Format("?DayTimeSpeedScale={0}?NightTimeSpeedScale={1}?ResourceNoReplenishRadiusPlayers={2}?ResourcesRespawnPeriodMultiplier={3}",
                 settings.DayTimeSpeedScale, settings.NightTimeSpeedScale, settings.ResourceNoReplenishRadiusPlayers, settings.ResourcesRespawnPeriodMultiplier);
 
+            // Additional Gameplay Multipliers
+            args += string.Format("?CropGrowthSpeedMultiplier={0}?PoopIntervalMultiplier={1}?LayEggIntervalMultiplier={2}?GlobalSpoilingTimeMultiplier={3}?GlobalItemDecompositionTimeMultiplier={4}?GlobalCorpseDecompositionTimeMultiplier={5}",
+                settings.CropGrowthSpeedMultiplier, settings.PoopIntervalMultiplier, settings.LayEggIntervalMultiplier, settings.GlobalSpoilingTimeMultiplier, settings.GlobalItemDecompositionTimeMultiplier, settings.GlobalCorpseDecompositionTimeMultiplier);
+
+            // Additional Rules
+            args += string.Format("?bEnableProximityChat={0}?bDisableDinoDecayPvE={1}?AllowAnyoneBabyImprintCuddle={2}?PreventOfflinePvP={3}?bUseCorpseLocator={4}?DisableWeatherFog={5}",
+                settings.EnableProximityChat, settings.DisableDinoDecayPvE, settings.AllowAnyoneBabyImprintCuddle, settings.PreventOfflinePvP, settings.UseCorpseLocator, settings.DisableWeatherFog);
+
             // PvP / PvE
             if (settings.DisablePvE == false)
                 args += "?ServerPVE=True";
