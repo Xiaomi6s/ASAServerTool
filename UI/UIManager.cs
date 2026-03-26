@@ -474,30 +474,31 @@ namespace ASAServerTool.UI
             tab.Controls.Add(scrollPanel);
             
             int currentY = 10;
-            int hintLeft = 230;
-            int hintWidth = 280;
+            int hintLeft = 260; // 调整说明文字的左侧间距
+            int hintWidth = 250;
+            int ctrlLeft = 150;
 
             // 1. PvE与建筑规则
             GroupBox grpPvE = new GroupBox { Text = "PvE与建筑规则", Left = 10, Top = currentY, Width = 520, Height = 170 };
             scrollPanel.Controls.Add(grpPvE);
             int innerY = 25;
 
-            chkAllowCaveBuilding = new CheckBox { Text = "允许在神器矿洞内建筑", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkAllowCaveBuilding = new CheckBox { Text = "允许在神器矿洞内建筑", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpPvE.Controls.Add(chkAllowCaveBuilding);
             grpPvE.Controls.Add(new Label { Text = "(仅在PvE模式下生效)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkAllowFlyerCarry = new CheckBox { Text = "允许飞行龙抓人/野龙", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkAllowFlyerCarry = new CheckBox { Text = "允许飞行龙抓人/野龙", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpPvE.Controls.Add(chkAllowFlyerCarry);
             grpPvE.Controls.Add(new Label { Text = "(PvE模式默认关闭，开启后可抓野龙)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkDisableStructurePlacementCollision = new CheckBox { Text = "允许建筑穿模", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkDisableStructurePlacementCollision = new CheckBox { Text = "允许建筑穿模", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpPvE.Controls.Add(chkDisableStructurePlacementCollision);
             grpPvE.Controls.Add(new Label { Text = "(可将建筑卡入地形/石头中)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkDisableDinoDecay = new CheckBox { Text = "关闭恐龙随时间饿死/销毁", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkDisableDinoDecay = new CheckBox { Text = "关闭恐龙随时间饿死/销毁", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpPvE.Controls.Add(chkDisableDinoDecay);
             grpPvE.Controls.Add(new Label { Text = "(PvE模式下恐龙长时间不喂食不会死亡)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             
@@ -508,27 +509,27 @@ namespace ASAServerTool.UI
             scrollPanel.Controls.Add(grpUI);
             innerY = 25;
 
-            chkShowFloatingDamage = new CheckBox { Text = "显示浮动伤害数字", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkShowFloatingDamage = new CheckBox { Text = "显示浮动伤害数字", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpUI.Controls.Add(chkShowFloatingDamage);
             grpUI.Controls.Add(new Label { Text = "(攻击时头上冒出的伤害值)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkAllowThirdPerson = new CheckBox { Text = "允许第三人称视角", Left = 10, Top = innerY, Width = 220, Checked = true };
+            chkAllowThirdPerson = new CheckBox { Text = "允许第三人称视角", Left = 10, Top = innerY, Width = 240, Checked = true };
             grpUI.Controls.Add(chkAllowThirdPerson);
             grpUI.Controls.Add(new Label { Text = "(允许玩家滚轮切换到第三人称)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkServerCrosshair = new CheckBox { Text = "显示服务器准星", Left = 10, Top = innerY, Width = 220, Checked = true };
+            chkServerCrosshair = new CheckBox { Text = "显示服务器准星", Left = 10, Top = innerY, Width = 240, Checked = true };
             grpUI.Controls.Add(chkServerCrosshair);
             grpUI.Controls.Add(new Label { Text = "(屏幕中间的十字准星)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkShowMapLocation = new CheckBox { Text = "在地图上显示玩家位置", Left = 10, Top = innerY, Width = 220, Checked = true };
+            chkShowMapLocation = new CheckBox { Text = "在地图上显示玩家位置", Left = 10, Top = innerY, Width = 240, Checked = true };
             grpUI.Controls.Add(chkShowMapLocation);
             grpUI.Controls.Add(new Label { Text = "(按M打开地图能看到自己的大头针)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkEnableProximityChat = new CheckBox { Text = "开启近距离语音聊天", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkEnableProximityChat = new CheckBox { Text = "开启近距离语音聊天", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpUI.Controls.Add(chkEnableProximityChat);
             grpUI.Controls.Add(new Label { Text = "(只有靠近的人才能听到语音)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
 
@@ -539,27 +540,27 @@ namespace ASAServerTool.UI
             scrollPanel.Controls.Add(grpOther);
             innerY = 25;
 
-            chkEnableCryoSickness = new CheckBox { Text = "启用低温症", Left = 10, Top = innerY, Width = 220, Checked = true };
+            chkEnableCryoSickness = new CheckBox { Text = "启用低温症", Left = 10, Top = innerY, Width = 240, Checked = true };
             grpOther.Controls.Add(chkEnableCryoSickness);
             grpOther.Controls.Add(new Label { Text = "(关闭后丢出冷冻舱恐龙不会眩晕)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkAllowAnyoneImprint = new CheckBox { Text = "允许任何人进行恐龙留痕", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkAllowAnyoneImprint = new CheckBox { Text = "允许任何人进行恐龙留痕", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpOther.Controls.Add(chkAllowAnyoneImprint);
             grpOther.Controls.Add(new Label { Text = "(不仅限于孵化者，部落成员都可以抚摸)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkPreventOfflinePvP = new CheckBox { Text = "开启离线保护 (ORP)", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkPreventOfflinePvP = new CheckBox { Text = "开启离线保护 (ORP)", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpOther.Controls.Add(chkPreventOfflinePvP);
             grpOther.Controls.Add(new Label { Text = "(玩家离线后建筑和恐龙免疫伤害)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkUseCorpseLocator = new CheckBox { Text = "启用尸体定位光柱", Left = 10, Top = innerY, Width = 220, Checked = true };
+            chkUseCorpseLocator = new CheckBox { Text = "启用尸体定位光柱", Left = 10, Top = innerY, Width = 240, Checked = true };
             grpOther.Controls.Add(chkUseCorpseLocator);
             grpOther.Controls.Add(new Label { Text = "(死后尸体上方会有一道冲天光柱)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkDisableWeatherFog = new CheckBox { Text = "强制关闭天气大雾", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkDisableWeatherFog = new CheckBox { Text = "强制关闭天气大雾", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpOther.Controls.Add(chkDisableWeatherFog);
             grpOther.Controls.Add(new Label { Text = "(服务器级别禁用起雾天气，提升视野)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             
@@ -571,7 +572,7 @@ namespace ASAServerTool.UI
             innerY = 25;
 
             grpLimit.Controls.Add(new Label { Text = "部落最大恐龙数:", Left = 10, Top = innerY, Width = lblWidth });
-            numMaxTamedDinos = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 1, Maximum = 10000, Value = 500 };
+            numMaxTamedDinos = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 1, Maximum = 10000, Value = 500 };
             grpLimit.Controls.Add(numMaxTamedDinos);
             grpLimit.Controls.Add(new Label { Text = "(每个部落允许拥有的最大恐龙数量)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
         }
@@ -579,20 +580,21 @@ namespace ASAServerTool.UI
         private void BuildBackupTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
         {
             int y = 20;
+            int ctrlLeft = 150;
 
-            chkAutoBackup = new CheckBox { Text = "启用自动备份存档 (仅在此工具运行时生效)", Left = 20, Top = y, Width = txtWidth, Checked = false };
+            chkAutoBackup = new CheckBox { Text = "启用自动备份存档 (仅在此工具运行时生效)", Left = 20, Top = y, Width = 300, Checked = false };
             tab.Controls.Add(chkAutoBackup);
             y += rowHeight;
 
             tab.Controls.Add(new Label { Text = "自动备份间隔(分钟):", Left = 20, Top = y, Width = lblWidth });
-            numBackupInterval = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 1, Maximum = 1440, Value = 60 };
+            numBackupInterval = new NumericUpDown { Left = ctrlLeft, Top = y, Width = 100, Minimum = 1, Maximum = 1440, Value = 60 };
             tab.Controls.Add(numBackupInterval);
             y += rowHeight;
 
             tab.Controls.Add(new Label { Text = "自定义备份目录:", Left = 20, Top = y, Width = lblWidth });
-            txtBackupPath = new TextBox { Left = 140, Top = y, Width = txtWidth - 40 };
+            txtBackupPath = new TextBox { Left = ctrlLeft, Top = y, Width = txtWidth - 40 };
             tab.Controls.Add(txtBackupPath);
-            btnBrowseBackup = new Button { Text = "...", Left = 140 + txtWidth - 30, Top = y - 2, Width = 30 };
+            btnBrowseBackup = new Button { Text = "...", Left = ctrlLeft + txtWidth - 30, Top = y - 2, Width = 30 };
             btnBrowseBackup.Click += (s, e) => { if (browseBackupAction != null) browseBackupAction(); };
             tab.Controls.Add(btnBrowseBackup);
             y += rowHeight;
@@ -610,21 +612,22 @@ namespace ASAServerTool.UI
             tab.Controls.Add(scrollPanel);
 
             int currentY = 10;
-            int hintLeft = 230;
-            int hintWidth = 280;
+            int hintLeft = 260; // 调整说明文字的左侧间距
+            int hintWidth = 250;
+            int ctrlLeft = 150;
 
             // 1. RCON 与 远程管理
             GroupBox grpRCON = new GroupBox { Text = "RCON 与 远程管理", Left = 10, Top = currentY, Width = 520, Height = 100 };
             scrollPanel.Controls.Add(grpRCON);
             int innerY = 25;
 
-            chkRCON = new CheckBox { Text = "启用 RCON 远程控制", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkRCON = new CheckBox { Text = "启用 RCON 远程控制", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpRCON.Controls.Add(chkRCON);
             grpRCON.Controls.Add(new Label { Text = "(允许通过第三方工具远程管理服务器)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpRCON.Controls.Add(new Label { Text = "RCON 端口:", Left = 10, Top = innerY, Width = lblWidth });
-            txtRCONPort = new TextBox { Left = 120, Top = innerY, Width = 100 };
+            txtRCONPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100 };
             grpRCON.Controls.Add(txtRCONPort);
             
             currentY += grpRCON.Height + 10;
@@ -634,12 +637,12 @@ namespace ASAServerTool.UI
             scrollPanel.Controls.Add(grpPlatform);
             innerY = 25;
 
-            chkCrossplay = new CheckBox { Text = "启用跨平台游玩 (Crossplay)", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkCrossplay = new CheckBox { Text = "启用跨平台游玩 (Crossplay)", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpPlatform.Controls.Add(chkCrossplay);
             grpPlatform.Controls.Add(new Label { Text = "(允许主机玩家加入服务器)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkBattleEye = new CheckBox { Text = "启用 BattlEye 反作弊", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkBattleEye = new CheckBox { Text = "启用 BattlEye 反作弊", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpPlatform.Controls.Add(chkBattleEye);
             grpPlatform.Controls.Add(new Label { Text = "(官方防作弊系统，模组服建议关闭)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             
@@ -650,18 +653,18 @@ namespace ASAServerTool.UI
             scrollPanel.Controls.Add(grpCmd);
             innerY = 25;
 
-            chkForceRespawn = new CheckBox { Text = "强制重置野生恐龙", Left = 10, Top = innerY, Width = 220, Checked = false };
+            chkForceRespawn = new CheckBox { Text = "强制重置野生恐龙", Left = 10, Top = innerY, Width = 240, Checked = false };
             grpCmd.Controls.Add(chkForceRespawn);
             grpCmd.Controls.Add(new Label { Text = "(每次启动时清空并重新刷新全图野生龙)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
-            chkPvE = new CheckBox { Text = "启用 PvE 模式", Left = 10, Top = innerY, Width = 220, Checked = true };
+            chkPvE = new CheckBox { Text = "启用 PvE 模式", Left = 10, Top = innerY, Width = 240, Checked = true };
             grpCmd.Controls.Add(chkPvE);
             grpCmd.Controls.Add(new Label { Text = "(取消勾选则变为 PvP 模式)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpCmd.Controls.Add(new Label { Text = "额外启动参数:", Left = 10, Top = innerY, Width = lblWidth });
-            txtExtraArgs = new TextBox { Left = 120, Top = innerY, Width = txtWidth };
+            txtExtraArgs = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
             grpCmd.Controls.Add(txtExtraArgs);
         }
 
