@@ -9,7 +9,7 @@ namespace ASAServerTool.UI
     {
         public TextBox txtPath;
         public Button btnBrowse;
-        public TextBox txtMap;
+        public ComboBox cmbMap;
         public TextBox txtName;
         public TextBox txtPass;
         public TextBox txtAdminPass;
@@ -110,8 +110,15 @@ namespace ASAServerTool.UI
             y += rowHeight;
 
             tab.Controls.Add(new Label { Text = "地图名称:", Left = 20, Top = y, Width = lblWidth });
-            txtMap = new TextBox { Left = 140, Top = y, Width = txtWidth };
-            tab.Controls.Add(txtMap);
+            cmbMap = new ComboBox { Left = 140, Top = y, Width = txtWidth, DropDownStyle = ComboBoxStyle.DropDown };
+            cmbMap.Items.AddRange(new object[] {
+                "TheIsland_WP",
+                "ScorchedEarth_WP",
+                "TheCenter_WP",
+                "Aberration_WP",
+                "Extinction_WP"
+            });
+            tab.Controls.Add(cmbMap);
             y += rowHeight;
 
             tab.Controls.Add(new Label { Text = "服务器名称:", Left = 20, Top = y, Width = lblWidth });
@@ -353,7 +360,7 @@ namespace ASAServerTool.UI
         public void BindSettingsToUI(AppSettings settings)
         {
             txtPath.Text = settings.ServerPath;
-            txtMap.Text = settings.MapName;
+            cmbMap.Text = settings.MapName;
             txtName.Text = settings.ServerName;
             txtPass.Text = settings.ServerPassword;
             txtAdminPass.Text = settings.AdminPassword;
@@ -393,7 +400,7 @@ namespace ASAServerTool.UI
         public void PopulateSettingsFromUI(AppSettings settings)
         {
             settings.ServerPath = txtPath.Text;
-            settings.MapName = txtMap.Text;
+            settings.MapName = cmbMap.Text;
             settings.ServerName = txtName.Text;
             settings.ServerPassword = txtPass.Text;
             settings.AdminPassword = txtAdminPass.Text;
