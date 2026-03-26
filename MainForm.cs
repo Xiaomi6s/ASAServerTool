@@ -21,8 +21,8 @@ namespace ASAServerTool
 
         public MainForm()
         {
-            this.Text = "方舟飞升 (ASA) 开服工具 - 终极版";
-            this.Size = new Size(600, 700);
+            this.Text = "方舟飞升 (ASA) 开服工具";
+            this.Size = new Size(620, 740);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             // 确保 Config 文件夹存在

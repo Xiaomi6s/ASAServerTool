@@ -114,11 +114,15 @@ namespace ASAServerTool.UI
 
         public void InitializeComponents()
         {
+            // 全局字体设置
+            parentForm.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(134)));
+            parentForm.BackColor = Color.FromArgb(240, 244, 248);
+
             int lblWidth = 140; // 增加 Label 宽度以防止文字显示不全
             int txtWidth = 330;
             int rowHeight = 35;
 
-            tabControl = new TabControl { Left = 10, Top = 10, Width = 560, Height = 450 };
+            tabControl = new TabControl { Left = 10, Top = 10, Width = 580, Height = 480 };
             
             TabPage tabBasic = new TabPage("基础设置");
             TabPage tabWorld = new TabPage("世界规则");
@@ -127,6 +131,16 @@ namespace ASAServerTool.UI
             TabPage tabBackup = new TabPage("自动备份");
             TabPage tabAdvanced = new TabPage("高级与网络");
             TabPage tabHelp = new TabPage("连接教程");
+
+            // 设置 TabPage 的背景色，使其统一且美观
+            Color tabBackColor = Color.White;
+            tabBasic.BackColor = tabBackColor;
+            tabWorld.BackColor = tabBackColor;
+            tabStats.BackColor = tabBackColor;
+            tabRules.BackColor = tabBackColor;
+            tabBackup.BackColor = tabBackColor;
+            tabAdvanced.BackColor = tabBackColor;
+            tabHelp.BackColor = tabBackColor;
 
             tabControl.TabPages.Add(tabBasic);
             tabControl.TabPages.Add(tabWorld);
@@ -156,75 +170,77 @@ namespace ASAServerTool.UI
             int innerY = 25;
 
             // 1. 核心服务器信息
-            GroupBox grpCore = new GroupBox { Text = "核心服务器信息", Left = 10, Top = currentY, Width = 520, Height = 210 };
+            GroupBox grpCore = new GroupBox { Text = "核心服务器信息", Left = 10, Top = currentY, Width = 520, Height = 210, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
+            // 将内部控件字体恢复为常规，防止全部加粗
+            Font regularFont = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             scrollPanel.Controls.Add(grpCore);
 
             int ctrlLeft = 150; // 统一调整输入控件的左侧间距
 
-            grpCore.Controls.Add(new Label { Text = "服务端路径:", Left = 10, Top = innerY, Width = lblWidth });
-            txtPath = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth - 40 };
+            grpCore.Controls.Add(new Label { Text = "服务端路径:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            txtPath = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth - 40, Font = regularFont };
             grpCore.Controls.Add(txtPath);
-            btnBrowse = new Button { Text = "...", Left = ctrlLeft + txtWidth - 30, Top = innerY - 2, Width = 30 };
+            btnBrowse = new Button { Text = "...", Left = ctrlLeft + txtWidth - 30, Top = innerY - 2, Width = 30, Font = regularFont };
             btnBrowse.Click += (s, e) => { if (browseAction != null) browseAction(); };
             grpCore.Controls.Add(btnBrowse);
             innerY += rowHeight;
 
-            grpCore.Controls.Add(new Label { Text = "地图名称:", Left = 10, Top = innerY, Width = lblWidth });
-            cmbMap = new ComboBox { Left = ctrlLeft, Top = innerY, Width = txtWidth, DropDownStyle = ComboBoxStyle.DropDown };
+            grpCore.Controls.Add(new Label { Text = "地图名称:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            cmbMap = new ComboBox { Left = ctrlLeft, Top = innerY, Width = txtWidth, DropDownStyle = ComboBoxStyle.DropDownList, Font = regularFont };
             cmbMap.Items.AddRange(new object[] {
-                "TheIsland_WP",
-                "ScorchedEarth_WP",
-                "TheCenter_WP",
-                "Aberration_WP",
-                "Extinction_WP",
-                "LostIsland_WP",
-                "Fjordur_WP",
-                "Genesis_WP",
-                "Valguero_WP",
-                "Ragnarok_WP",
-                "CrystalIsles_WP"
+                "TheIsland_WP (孤岛)",
+                "ScorchedEarth_WP (焦土)",
+                "TheCenter_WP (中心岛)",
+                "Aberration_WP (畸变)",
+                "Extinction_WP (灭绝)",
+                "LostIsland_WP (失落岛)",
+                "Fjordur_WP (维京湾)",
+                "Genesis_WP (创世纪)",
+                "Valguero_WP (瓦尔盖罗)",
+                "Ragnarok_WP (仙境)",
+                "CrystalIsles_WP (水晶岛)"
             });
             grpCore.Controls.Add(cmbMap);
             innerY += rowHeight;
 
-            grpCore.Controls.Add(new Label { Text = "服务器名称:", Left = 10, Top = innerY, Width = lblWidth });
-            txtName = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpCore.Controls.Add(new Label { Text = "服务器名称:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            txtName = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth, Font = regularFont };
             grpCore.Controls.Add(txtName);
             innerY += rowHeight;
 
-            grpCore.Controls.Add(new Label { Text = "服务器密码:", Left = 10, Top = innerY, Width = lblWidth });
-            txtPass = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpCore.Controls.Add(new Label { Text = "服务器密码:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            txtPass = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth, Font = regularFont };
             grpCore.Controls.Add(txtPass);
             innerY += rowHeight;
 
-            grpCore.Controls.Add(new Label { Text = "管理员密码:", Left = 10, Top = innerY, Width = lblWidth });
-            txtAdminPass = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpCore.Controls.Add(new Label { Text = "管理员密码:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            txtAdminPass = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth, Font = regularFont };
             grpCore.Controls.Add(txtAdminPass);
             
             currentY += grpCore.Height + 10;
 
             // 2. 网络与内容
-            GroupBox grpNet = new GroupBox { Text = "网络与内容设置", Left = 10, Top = currentY, Width = 520, Height = 170 };
+            GroupBox grpNet = new GroupBox { Text = "网络与内容设置", Left = 10, Top = currentY, Width = 520, Height = 170, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpNet);
             innerY = 25;
 
-            grpNet.Controls.Add(new Label { Text = "最大玩家数:", Left = 10, Top = innerY, Width = lblWidth });
-            numMaxPlayers = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 1, Maximum = 200, Value = 70 };
+            grpNet.Controls.Add(new Label { Text = "最大玩家数:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            numMaxPlayers = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 1, Maximum = 200, Value = 70, Font = regularFont };
             grpNet.Controls.Add(numMaxPlayers);
             innerY += rowHeight;
 
-            grpNet.Controls.Add(new Label { Text = "游戏端口:", Left = 10, Top = innerY, Width = lblWidth });
-            txtPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100 };
+            grpNet.Controls.Add(new Label { Text = "游戏端口:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            txtPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100, Font = regularFont };
             grpNet.Controls.Add(txtPort);
             innerY += rowHeight;
 
-            grpNet.Controls.Add(new Label { Text = "查询端口:", Left = 10, Top = innerY, Width = lblWidth });
-            txtQueryPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100 };
+            grpNet.Controls.Add(new Label { Text = "查询端口:", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            txtQueryPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100, Font = regularFont };
             grpNet.Controls.Add(txtQueryPort);
             innerY += rowHeight;
 
-            grpNet.Controls.Add(new Label { Text = "Mod ID(逗号分隔):", Left = 10, Top = innerY, Width = lblWidth });
-            txtMods = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpNet.Controls.Add(new Label { Text = "Mod ID(逗号分隔):", Left = 10, Top = innerY, Width = lblWidth, Font = regularFont });
+            txtMods = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth, Font = regularFont };
             grpNet.Controls.Add(txtMods);
         }
 
@@ -239,7 +255,7 @@ namespace ASAServerTool.UI
             int hintWidth = 250;
 
             // 1. 基础生存倍率
-            GroupBox grpBasic = new GroupBox { Text = "基础生存倍率", Left = 10, Top = currentY, Width = 520, Height = 170 };
+            GroupBox grpBasic = new GroupBox { Text = "基础生存倍率", Left = 10, Top = currentY, Width = 520, Height = 170, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpBasic);
             int innerY = 25;
 
@@ -266,10 +282,11 @@ namespace ASAServerTool.UI
             grpBasic.Controls.Add(numDifficulty);
             grpBasic.Controls.Add(new Label { Text = "(影响野生龙等级, 1.0通常对应150级满级)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             
+            foreach (Control c in grpBasic.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpBasic.Height + 10;
 
             // 2. 繁殖与成长
-            GroupBox grpBreed = new GroupBox { Text = "繁殖与成长", Left = 10, Top = currentY, Width = 520, Height = 135 };
+            GroupBox grpBreed = new GroupBox { Text = "繁殖与成长", Left = 10, Top = currentY, Width = 520, Height = 135, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpBreed);
             innerY = 25;
 
@@ -290,10 +307,11 @@ namespace ASAServerTool.UI
             grpBreed.Controls.Add(numMature);
             grpBreed.Controls.Add(new Label { Text = "(越大幼龙长大越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
 
+            foreach (Control c in grpBreed.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpBreed.Height + 10;
 
             // 3. 环境与生态
-            GroupBox grpEnv = new GroupBox { Text = "环境与生态", Left = 10, Top = currentY, Width = 520, Height = 205 };
+            GroupBox grpEnv = new GroupBox { Text = "环境与生态", Left = 10, Top = currentY, Width = 520, Height = 205, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpEnv);
             innerY = 25;
 
@@ -326,10 +344,11 @@ namespace ASAServerTool.UI
             grpEnv.Controls.Add(numResourceRadius);
             grpEnv.Controls.Add(new Label { Text = "(越小资源离家越近)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
 
+            foreach (Control c in grpEnv.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpEnv.Height + 10;
 
             // 4. 其他时间流逝设定
-            GroupBox grpTime = new GroupBox { Text = "周期与时间流逝设定", Left = 10, Top = currentY, Width = 520, Height = 240 };
+            GroupBox grpTime = new GroupBox { Text = "周期与时间流逝设定", Left = 10, Top = currentY, Width = 520, Height = 240, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpTime);
             innerY = 25;
 
@@ -367,6 +386,8 @@ namespace ASAServerTool.UI
             numGlobalCorpseDecomp = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpTime.Controls.Add(numGlobalCorpseDecomp);
             grpTime.Controls.Add(new Label { Text = "(越大玩家/恐龙尸体存在越久)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+
+            foreach (Control c in grpTime.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
         }
 
         private void BuildStatsTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
@@ -380,7 +401,7 @@ namespace ASAServerTool.UI
             int hintWidth = 250;
 
             // 1. 玩家属性消耗
-            GroupBox grpPlayerStats = new GroupBox { Text = "玩家属性消耗与恢复", Left = 10, Top = currentY, Width = 520, Height = 170 };
+            GroupBox grpPlayerStats = new GroupBox { Text = "玩家属性消耗与恢复", Left = 10, Top = currentY, Width = 520, Height = 170, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpPlayerStats);
             int innerY = 25;
 
@@ -407,10 +428,11 @@ namespace ASAServerTool.UI
             grpPlayerStats.Controls.Add(numPlayerHealthRecovery);
             grpPlayerStats.Controls.Add(new Label { Text = "(越大回血越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             
+            foreach (Control c in grpPlayerStats.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpPlayerStats.Height + 10;
 
             // 2. 恐龙属性消耗
-            GroupBox grpDinoStats = new GroupBox { Text = "恐龙属性消耗与恢复", Left = 10, Top = currentY, Width = 520, Height = 135 };
+            GroupBox grpDinoStats = new GroupBox { Text = "恐龙属性消耗与恢复", Left = 10, Top = currentY, Width = 520, Height = 135, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpDinoStats);
             innerY = 25;
 
@@ -431,10 +453,11 @@ namespace ASAServerTool.UI
             grpDinoStats.Controls.Add(numDinoHealthRecovery);
             grpDinoStats.Controls.Add(new Label { Text = "(越大恐龙回血越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
 
+            foreach (Control c in grpDinoStats.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpDinoStats.Height + 10;
 
             // 3. 留痕高级设置
-            GroupBox grpImprint = new GroupBox { Text = "留痕高级设置", Left = 10, Top = currentY, Width = 520, Height = 205 };
+            GroupBox grpImprint = new GroupBox { Text = "留痕高级设置", Left = 10, Top = currentY, Width = 520, Height = 205, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpImprint);
             innerY = 25;
 
@@ -466,6 +489,8 @@ namespace ASAServerTool.UI
             numBabyFoodConsume = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpImprint.Controls.Add(numBabyFoodConsume);
             grpImprint.Controls.Add(new Label { Text = "(越小宝宝饿得越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+
+            foreach (Control c in grpImprint.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
         }
 
         private void BuildRulesTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
@@ -479,7 +504,7 @@ namespace ASAServerTool.UI
             int ctrlLeft = 150;
 
             // 1. PvE与建筑规则
-            GroupBox grpPvE = new GroupBox { Text = "PvE与建筑规则", Left = 10, Top = currentY, Width = 520, Height = 170 };
+            GroupBox grpPvE = new GroupBox { Text = "PvE与建筑规则", Left = 10, Top = currentY, Width = 520, Height = 170, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpPvE);
             int innerY = 25;
 
@@ -502,10 +527,11 @@ namespace ASAServerTool.UI
             grpPvE.Controls.Add(chkDisableDinoDecay);
             grpPvE.Controls.Add(new Label { Text = "(PvE模式下恐龙长时间不喂食不会死亡)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             
+            foreach (Control c in grpPvE.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpPvE.Height + 10;
 
             // 2. 玩家UI与交互
-            GroupBox grpUI = new GroupBox { Text = "玩家UI与交互设置", Left = 10, Top = currentY, Width = 520, Height = 205 };
+            GroupBox grpUI = new GroupBox { Text = "玩家UI与交互设置", Left = 10, Top = currentY, Width = 520, Height = 205, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpUI);
             innerY = 25;
 
@@ -533,10 +559,11 @@ namespace ASAServerTool.UI
             grpUI.Controls.Add(chkEnableProximityChat);
             grpUI.Controls.Add(new Label { Text = "(只有靠近的人才能听到语音)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
 
+            foreach (Control c in grpUI.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpUI.Height + 10;
 
             // 3. 其他游戏规则
-            GroupBox grpOther = new GroupBox { Text = "其他游戏规则", Left = 10, Top = currentY, Width = 520, Height = 205 };
+            GroupBox grpOther = new GroupBox { Text = "其他游戏规则", Left = 10, Top = currentY, Width = 520, Height = 205, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpOther);
             innerY = 25;
 
@@ -564,10 +591,11 @@ namespace ASAServerTool.UI
             grpOther.Controls.Add(chkDisableWeatherFog);
             grpOther.Controls.Add(new Label { Text = "(服务器级别禁用起雾天气，提升视野)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             
+            foreach (Control c in grpOther.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpOther.Height + 10;
             
             // 4. 数值限制
-            GroupBox grpLimit = new GroupBox { Text = "限制规则", Left = 10, Top = currentY, Width = 520, Height = 65 };
+            GroupBox grpLimit = new GroupBox { Text = "限制规则", Left = 10, Top = currentY, Width = 520, Height = 65, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpLimit);
             innerY = 25;
 
@@ -575,36 +603,46 @@ namespace ASAServerTool.UI
             numMaxTamedDinos = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 1, Maximum = 10000, Value = 500 };
             grpLimit.Controls.Add(numMaxTamedDinos);
             grpLimit.Controls.Add(new Label { Text = "(每个部落允许拥有的最大恐龙数量)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+
+            foreach (Control c in grpLimit.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
         }
 
         private void BuildBackupTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
         {
-            int y = 20;
-            int localLblWidth = 150; // 覆盖传入的 lblWidth，专门给当前页面更长的文本
-            int ctrlLeft = 170; // 进一步增加间距以容纳更长的“自动备份间隔(分钟):”文本
+            Panel scrollPanel = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
+            tab.Controls.Add(scrollPanel);
 
-            chkAutoBackup = new CheckBox { Text = "启用自动备份存档 (仅在此工具运行时生效)", Left = 20, Top = y, Width = 300, Checked = false };
-            tab.Controls.Add(chkAutoBackup);
-            y += rowHeight;
+            int localLblWidth = 150; 
+            int ctrlLeft = 170; 
 
-            tab.Controls.Add(new Label { Text = "自动备份间隔(分钟):", Left = 20, Top = y, Width = localLblWidth });
-            numBackupInterval = new NumericUpDown { Left = ctrlLeft, Top = y, Width = 100, Minimum = 1, Maximum = 1440, Value = 60 };
-            tab.Controls.Add(numBackupInterval);
-            y += rowHeight;
+            GroupBox grpBackup = new GroupBox { Text = "自动备份设置", Left = 10, Top = 10, Width = 520, Height = 170, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
+            scrollPanel.Controls.Add(grpBackup);
+            int innerY = 25;
 
-            tab.Controls.Add(new Label { Text = "自定义备份目录:", Left = 20, Top = y, Width = localLblWidth });
-            txtBackupPath = new TextBox { Left = ctrlLeft, Top = y, Width = txtWidth - 40 };
-            tab.Controls.Add(txtBackupPath);
-            btnBrowseBackup = new Button { Text = "...", Left = ctrlLeft + txtWidth - 30, Top = y - 2, Width = 30 };
+            chkAutoBackup = new CheckBox { Text = "启用自动备份存档 (仅在此工具运行时生效)", Left = 10, Top = innerY, Width = 300, Checked = false };
+            grpBackup.Controls.Add(chkAutoBackup);
+            innerY += rowHeight;
+
+            grpBackup.Controls.Add(new Label { Text = "自动备份间隔(分钟):", Left = 10, Top = innerY, Width = localLblWidth });
+            numBackupInterval = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 1, Maximum = 1440, Value = 60 };
+            grpBackup.Controls.Add(numBackupInterval);
+            innerY += rowHeight;
+
+            grpBackup.Controls.Add(new Label { Text = "自定义备份目录:", Left = 10, Top = innerY, Width = localLblWidth });
+            txtBackupPath = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth - 40 };
+            grpBackup.Controls.Add(txtBackupPath);
+            btnBrowseBackup = new Button { Text = "...", Left = ctrlLeft + txtWidth - 30, Top = innerY - 2, Width = 30 };
             btnBrowseBackup.Click += (s, e) => { if (browseBackupAction != null) browseBackupAction(); };
-            tab.Controls.Add(btnBrowseBackup);
-            y += rowHeight;
+            grpBackup.Controls.Add(btnBrowseBackup);
+            innerY += rowHeight;
             
             Label lblHint = new Label { 
                 Text = "提示：如果留空，默认备份至 ShooterGame/Saved/AutoBackups", 
-                Left = 20, Top = y, Width = 500, ForeColor = Color.Gray 
+                Left = 10, Top = innerY, Width = 500, ForeColor = Color.Gray 
             };
-            tab.Controls.Add(lblHint);
+            grpBackup.Controls.Add(lblHint);
+
+            foreach (Control c in grpBackup.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
         }
 
         private void BuildAdvancedTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
@@ -618,7 +656,7 @@ namespace ASAServerTool.UI
             int ctrlLeft = 150;
 
             // 1. RCON 与 远程管理
-            GroupBox grpRCON = new GroupBox { Text = "RCON 与 远程管理", Left = 10, Top = currentY, Width = 520, Height = 100 };
+            GroupBox grpRCON = new GroupBox { Text = "RCON 与 远程管理", Left = 10, Top = currentY, Width = 520, Height = 100, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpRCON);
             int innerY = 25;
 
@@ -631,10 +669,11 @@ namespace ASAServerTool.UI
             txtRCONPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100 };
             grpRCON.Controls.Add(txtRCONPort);
             
+            foreach (Control c in grpRCON.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpRCON.Height + 10;
 
             // 2. 跨平台与反作弊
-            GroupBox grpPlatform = new GroupBox { Text = "跨平台与反作弊", Left = 10, Top = currentY, Width = 520, Height = 100 };
+            GroupBox grpPlatform = new GroupBox { Text = "跨平台与反作弊", Left = 10, Top = currentY, Width = 520, Height = 100, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpPlatform);
             innerY = 25;
 
@@ -647,10 +686,11 @@ namespace ASAServerTool.UI
             grpPlatform.Controls.Add(chkBattleEye);
             grpPlatform.Controls.Add(new Label { Text = "(官方防作弊系统，模组服建议关闭)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
             
+            foreach (Control c in grpPlatform.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
             currentY += grpPlatform.Height + 10;
 
             // 3. 高级服务器指令
-            GroupBox grpCmd = new GroupBox { Text = "高级服务器指令", Left = 10, Top = currentY, Width = 520, Height = 135 };
+            GroupBox grpCmd = new GroupBox { Text = "高级服务器指令", Left = 10, Top = currentY, Width = 520, Height = 135, Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold) };
             scrollPanel.Controls.Add(grpCmd);
             innerY = 25;
 
@@ -667,6 +707,8 @@ namespace ASAServerTool.UI
             grpCmd.Controls.Add(new Label { Text = "额外启动参数:", Left = 10, Top = innerY, Width = lblWidth });
             txtExtraArgs = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
             grpCmd.Controls.Add(txtExtraArgs);
+
+            foreach (Control c in grpCmd.Controls) c.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
         }
 
         private void BuildHelpTab(TabPage tab)
@@ -708,29 +750,65 @@ namespace ASAServerTool.UI
 
         private void BuildBottomControls()
         {
-            int y = 470;
+            int y = 500; // 调整 Y 坐标避免与 TabControl 重叠
 
-            btnLoad = new Button { Text = "加载配置", Left = 30, Top = y, Width = 90, Height = 35 };
+            btnLoad = new Button { 
+                Text = "加载配置", Left = 30, Top = y, Width = 90, Height = 38, 
+                FlatStyle = FlatStyle.Flat, BackColor = Color.White, Cursor = Cursors.Hand,
+                Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular)
+            };
+            btnLoad.FlatAppearance.BorderColor = Color.Silver;
             btnLoad.Click += (s, e) => { if (loadAction != null) loadAction(); };
             parentForm.Controls.Add(btnLoad);
 
-            btnSave = new Button { Text = "保存配置", Left = 130, Top = y, Width = 90, Height = 35 };
+            btnSave = new Button { 
+                Text = "保存配置", Left = 135, Top = y, Width = 90, Height = 38, 
+                FlatStyle = FlatStyle.Flat, BackColor = Color.White, Cursor = Cursors.Hand,
+                Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular)
+            };
+            btnSave.FlatAppearance.BorderColor = Color.Silver;
             btnSave.Click += (s, e) => { if (saveAction != null) saveAction(); };
             parentForm.Controls.Add(btnSave);
 
-            btnStart = new Button { Text = "启动服务器", Left = 240, Top = y, Width = 180, Height = 35, BackColor = Color.LightGreen };
+            btnStart = new Button { 
+                Text = "▶ 启动服务器", Left = 240, Top = y, Width = 330, Height = 38, 
+                FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(76, 175, 80), ForeColor = Color.White, Cursor = Cursors.Hand,
+                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold)
+            };
+            btnStart.FlatAppearance.BorderSize = 0;
             btnStart.Click += (s, e) => { if (startAction != null) startAction(); };
             parentForm.Controls.Add(btnStart);
-            y += 45;
+            y += 48;
 
-            txtLog = new TextBox { Left = 10, Top = y, Width = 560, Height = 130, Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical };
+            txtLog = new TextBox { 
+                Left = 10, Top = y, Width = 580, Height = 130, 
+                Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical,
+                BackColor = Color.FromArgb(30, 30, 30), ForeColor = Color.LightGray,
+                Font = new Font("Consolas", 9F, FontStyle.Regular)
+            };
             parentForm.Controls.Add(txtLog);
         }
 
         public void BindSettingsToUI(AppSettings settings)
         {
             txtPath.Text = settings.ServerPath;
-            cmbMap.Text = settings.MapName;
+
+            // 根据保存的值，尝试在 ComboBox 中匹配包含该地图文件名的项
+            string savedMap = settings.MapName;
+            int foundIndex = -1;
+            for (int i = 0; i < cmbMap.Items.Count; i++)
+            {
+                if (cmbMap.Items[i].ToString().StartsWith(savedMap))
+                {
+                    foundIndex = i;
+                    break;
+                }
+            }
+            if (foundIndex != -1)
+                cmbMap.SelectedIndex = foundIndex;
+            else
+                cmbMap.Text = savedMap;
+
             txtName.Text = settings.ServerName;
             txtPass.Text = settings.ServerPassword;
             txtAdminPass.Text = settings.AdminPassword;
@@ -809,7 +887,19 @@ namespace ASAServerTool.UI
         public void PopulateSettingsFromUI(AppSettings settings)
         {
             settings.ServerPath = txtPath.Text;
-            settings.MapName = cmbMap.Text;
+
+            // 提取地图的实际文件名 (去除中文备注)
+            string selectedMap = cmbMap.Text;
+            int spaceIndex = selectedMap.IndexOf(' ');
+            if (spaceIndex > 0)
+            {
+                settings.MapName = selectedMap.Substring(0, spaceIndex);
+            }
+            else
+            {
+                settings.MapName = selectedMap;
+            }
+
             settings.ServerName = txtName.Text;
             settings.ServerPassword = txtPass.Text;
             settings.AdminPassword = txtAdminPass.Text;
