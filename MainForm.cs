@@ -163,6 +163,23 @@ namespace ASAServerTool
             args += string.Format("?MatingIntervalMultiplier={0}?EggHatchSpeedMultiplier={1}?BabyMatureSpeedMultiplier={2}?DinoCountMultiplier={3}",
                 settings.MatingIntervalMultiplier, settings.EggHatchSpeedMultiplier, settings.BabyMatureSpeedMultiplier, settings.DinoCountMultiplier);
 
+            // Advanced Breeding
+            args += string.Format("?BabyCuddleIntervalMultiplier={0}?BabyCuddleGracePeriodMultiplier={1}?BabyCuddleLoseImprintQualitySpeedMultiplier={2}?BabyImprintingStatScaleMultiplier={3}?BabyFoodConsumptionSpeedMultiplier={4}",
+                settings.BabyCuddleIntervalMultiplier, settings.BabyCuddleGracePeriodMultiplier, settings.BabyCuddleLoseImprintQualitySpeedMultiplier, settings.BabyImprintingStatScaleMultiplier, settings.BabyFoodConsumptionSpeedMultiplier);
+
+            // Player & Dino Stats
+            args += string.Format("?PlayerCharacterWaterDrainMultiplier={0}?PlayerCharacterFoodDrainMultiplier={1}?PlayerCharacterStaminaDrainMultiplier={2}?PlayerCharacterHealthRecoveryMultiplier={3}",
+                settings.PlayerCharacterWaterDrainMultiplier, settings.PlayerCharacterFoodDrainMultiplier, settings.PlayerCharacterStaminaDrainMultiplier, settings.PlayerCharacterHealthRecoveryMultiplier);
+            args += string.Format("?DinoCharacterFoodDrainMultiplier={0}?DinoCharacterStaminaDrainMultiplier={1}?DinoCharacterHealthRecoveryMultiplier={2}",
+                settings.DinoCharacterFoodDrainMultiplier, settings.DinoCharacterStaminaDrainMultiplier, settings.DinoCharacterHealthRecoveryMultiplier);
+
+            // Rules & Options
+            args += string.Format("?AllowCaveBuildingPvE={0}?bAllowFlyerCarryPvE={1}?bDisableStructurePlacementCollision={2}?EnableCryoSicknessPVE={3}",
+                settings.AllowCaveBuildingPvE, settings.AllowFlyerCarryPvE, settings.DisableStructurePlacementCollision, settings.EnableCryoSicknessPVE);
+            args += string.Format("?ShowFloatingDamageText={0}?AllowThirdPersonPlayer={1}?ServerCrosshair={2}?ShowMapPlayerLocation={3}",
+                settings.ShowFloatingDamageText, settings.AllowThirdPersonPlayer, settings.ServerCrosshair, settings.ShowMapPlayerLocation);
+            args += string.Format("?MaxPersonalTamedDinos={0}", settings.MaxPersonalTamedDinos);
+
             // Day/Night & Resources
             args += string.Format("?DayTimeSpeedScale={0}?NightTimeSpeedScale={1}?ResourceNoReplenishRadiusPlayers={2}?ResourcesRespawnPeriodMultiplier={3}",
                 settings.DayTimeSpeedScale, settings.NightTimeSpeedScale, settings.ResourceNoReplenishRadiusPlayers, settings.ResourcesRespawnPeriodMultiplier);

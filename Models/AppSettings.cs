@@ -35,6 +35,35 @@ namespace ASAServerTool.Models
         public decimal ResourceNoReplenishRadiusPlayers { get; set; }
         public decimal ResourcesRespawnPeriodMultiplier { get; set; }
 
+        // Player Stats Multipliers
+        public decimal PlayerCharacterWaterDrainMultiplier { get; set; }
+        public decimal PlayerCharacterFoodDrainMultiplier { get; set; }
+        public decimal PlayerCharacterStaminaDrainMultiplier { get; set; }
+        public decimal PlayerCharacterHealthRecoveryMultiplier { get; set; }
+
+        // Dino Stats Multipliers
+        public decimal DinoCharacterFoodDrainMultiplier { get; set; }
+        public decimal DinoCharacterStaminaDrainMultiplier { get; set; }
+        public decimal DinoCharacterHealthRecoveryMultiplier { get; set; }
+
+        // Advanced Breeding
+        public decimal BabyCuddleIntervalMultiplier { get; set; }
+        public decimal BabyCuddleGracePeriodMultiplier { get; set; }
+        public decimal BabyCuddleLoseImprintQualitySpeedMultiplier { get; set; }
+        public decimal BabyImprintingStatScaleMultiplier { get; set; }
+        public decimal BabyFoodConsumptionSpeedMultiplier { get; set; }
+
+        // Rules & Options
+        public bool AllowCaveBuildingPvE { get; set; }
+        public bool AllowFlyerCarryPvE { get; set; }
+        public bool DisableStructurePlacementCollision { get; set; }
+        public bool EnableCryoSicknessPVE { get; set; }
+        public bool ShowFloatingDamageText { get; set; }
+        public bool AllowThirdPersonPlayer { get; set; }
+        public bool ServerCrosshair { get; set; }
+        public bool ShowMapPlayerLocation { get; set; }
+        public int MaxPersonalTamedDinos { get; set; }
+
         // Environment & Networking Settings
         public bool EnableRCON { get; set; }
         public string RCONPort { get; set; }
@@ -75,6 +104,32 @@ namespace ASAServerTool.Models
             NightTimeSpeedScale = 1.0m;
             ResourceNoReplenishRadiusPlayers = 1.0m;
             ResourcesRespawnPeriodMultiplier = 1.0m;
+
+            // Stats Defaults
+            PlayerCharacterWaterDrainMultiplier = 1.0m;
+            PlayerCharacterFoodDrainMultiplier = 1.0m;
+            PlayerCharacterStaminaDrainMultiplier = 1.0m;
+            PlayerCharacterHealthRecoveryMultiplier = 1.0m;
+
+            DinoCharacterFoodDrainMultiplier = 1.0m;
+            DinoCharacterStaminaDrainMultiplier = 1.0m;
+            DinoCharacterHealthRecoveryMultiplier = 1.0m;
+
+            BabyCuddleIntervalMultiplier = 1.0m;
+            BabyCuddleGracePeriodMultiplier = 1.0m;
+            BabyCuddleLoseImprintQualitySpeedMultiplier = 1.0m;
+            BabyImprintingStatScaleMultiplier = 1.0m;
+            BabyFoodConsumptionSpeedMultiplier = 1.0m;
+
+            AllowCaveBuildingPvE = false;
+            AllowFlyerCarryPvE = false;
+            DisableStructurePlacementCollision = false;
+            EnableCryoSicknessPVE = true;
+            ShowFloatingDamageText = false;
+            AllowThirdPersonPlayer = true;
+            ServerCrosshair = true;
+            ShowMapPlayerLocation = true;
+            MaxPersonalTamedDinos = 500;
 
             // Network/Env defaults
             EnableRCON = true;

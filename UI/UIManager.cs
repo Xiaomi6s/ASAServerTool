@@ -32,6 +32,34 @@ namespace ASAServerTool.UI
         public NumericUpDown numResourceRadius;
         public NumericUpDown numResourceRespawn;
 
+        // Stats
+        public NumericUpDown numPlayerWaterDrain;
+        public NumericUpDown numPlayerFoodDrain;
+        public NumericUpDown numPlayerStaminaDrain;
+        public NumericUpDown numPlayerHealthRecovery;
+
+        public NumericUpDown numDinoFoodDrain;
+        public NumericUpDown numDinoStaminaDrain;
+        public NumericUpDown numDinoHealthRecovery;
+
+        // Advanced Breeding
+        public NumericUpDown numBabyCuddleInterval;
+        public NumericUpDown numBabyCuddleGrace;
+        public NumericUpDown numBabyCuddleLoseImprint;
+        public NumericUpDown numBabyImprintScale;
+        public NumericUpDown numBabyFoodConsume;
+
+        // Rules
+        public CheckBox chkAllowCaveBuilding;
+        public CheckBox chkAllowFlyerCarry;
+        public CheckBox chkDisableStructurePlacementCollision;
+        public CheckBox chkEnableCryoSickness;
+        public CheckBox chkShowFloatingDamage;
+        public CheckBox chkAllowThirdPerson;
+        public CheckBox chkServerCrosshair;
+        public CheckBox chkShowMapLocation;
+        public NumericUpDown numMaxTamedDinos;
+
         public CheckBox chkPvE;
         public CheckBox chkBattleEye;
         public CheckBox chkCrossplay;
@@ -78,12 +106,16 @@ namespace ASAServerTool.UI
             
             TabPage tabBasic = new TabPage("基础设置");
             TabPage tabWorld = new TabPage("世界规则");
+            TabPage tabStats = new TabPage("玩家与恐龙");
+            TabPage tabRules = new TabPage("游戏选项");
             TabPage tabBackup = new TabPage("自动备份");
             TabPage tabAdvanced = new TabPage("高级与网络");
             TabPage tabHelp = new TabPage("连接教程");
 
             tabControl.TabPages.Add(tabBasic);
             tabControl.TabPages.Add(tabWorld);
+            tabControl.TabPages.Add(tabStats);
+            tabControl.TabPages.Add(tabRules);
             tabControl.TabPages.Add(tabBackup);
             tabControl.TabPages.Add(tabAdvanced);
             tabControl.TabPages.Add(tabHelp);
@@ -91,6 +123,8 @@ namespace ASAServerTool.UI
 
             BuildBasicTab(tabBasic, lblWidth, txtWidth, rowHeight);
             BuildWorldTab(tabWorld, lblWidth, txtWidth, rowHeight);
+            BuildStatsTab(tabStats, lblWidth, txtWidth, rowHeight);
+            BuildRulesTab(tabRules, lblWidth, txtWidth, rowHeight);
             BuildBackupTab(tabBackup, lblWidth, txtWidth, rowHeight);
             BuildAdvancedTab(tabAdvanced, lblWidth, txtWidth, rowHeight);
             BuildHelpTab(tabHelp);
@@ -239,6 +273,143 @@ namespace ASAServerTool.UI
             scrollPanel.Controls.Add(new Label { Text = "(越小资源离家越近)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
         }
 
+        private void BuildStatsTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
+        {
+            Panel scrollPanel = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
+            tab.Controls.Add(scrollPanel);
+            int y = 10;
+            int hintLeft = 250;
+            int hintWidth = 280;
+
+            scrollPanel.Controls.Add(new Label { Text = "玩家水分消耗:", Left = 20, Top = y, Width = lblWidth });
+            numPlayerWaterDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numPlayerWaterDrain);
+            scrollPanel.Controls.Add(new Label { Text = "(越小口渴越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "玩家食物消耗:", Left = 20, Top = y, Width = lblWidth });
+            numPlayerFoodDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numPlayerFoodDrain);
+            scrollPanel.Controls.Add(new Label { Text = "(越小饥饿越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "玩家耐力消耗:", Left = 20, Top = y, Width = lblWidth });
+            numPlayerStaminaDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numPlayerStaminaDrain);
+            scrollPanel.Controls.Add(new Label { Text = "(越小耐力掉得越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "玩家生命恢复:", Left = 20, Top = y, Width = lblWidth });
+            numPlayerHealthRecovery = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numPlayerHealthRecovery);
+            scrollPanel.Controls.Add(new Label { Text = "(越大回血越快)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "恐龙食物消耗:", Left = 20, Top = y, Width = lblWidth });
+            numDinoFoodDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numDinoFoodDrain);
+            scrollPanel.Controls.Add(new Label { Text = "(越小恐龙饥饿越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "恐龙耐力消耗:", Left = 20, Top = y, Width = lblWidth });
+            numDinoStaminaDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numDinoStaminaDrain);
+            scrollPanel.Controls.Add(new Label { Text = "(越小恐龙耐力掉得越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "恐龙生命恢复:", Left = 20, Top = y, Width = lblWidth });
+            numDinoHealthRecovery = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numDinoHealthRecovery);
+            scrollPanel.Controls.Add(new Label { Text = "(越大恐龙回血越快)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "--- 留痕高级设置 ---", Left = 20, Top = y, Width = 200, ForeColor = Color.Blue });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "留痕间隔倍率:", Left = 20, Top = y, Width = lblWidth });
+            numBabyCuddleInterval = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numBabyCuddleInterval);
+            scrollPanel.Controls.Add(new Label { Text = "(越小越频繁要求留痕)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "留痕宽限期倍率:", Left = 20, Top = y, Width = lblWidth });
+            numBabyCuddleGrace = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numBabyCuddleGrace);
+            scrollPanel.Controls.Add(new Label { Text = "(越大允许你迟到的时间越久)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "留痕掉分速度倍率:", Left = 20, Top = y, Width = lblWidth });
+            numBabyCuddleLoseImprint = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numBabyCuddleLoseImprint);
+            scrollPanel.Controls.Add(new Label { Text = "(越小错过留痕掉的分越少)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "单次留痕加成倍率:", Left = 20, Top = y, Width = lblWidth });
+            numBabyImprintScale = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
+            scrollPanel.Controls.Add(numBabyImprintScale);
+            scrollPanel.Controls.Add(new Label { Text = "(越大每次给的留痕度越多)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "幼龙食物消耗:", Left = 20, Top = y, Width = lblWidth });
+            numBabyFoodConsume = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            scrollPanel.Controls.Add(numBabyFoodConsume);
+            scrollPanel.Controls.Add(new Label { Text = "(越小宝宝饿得越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+        }
+
+        private void BuildRulesTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
+        {
+            Panel scrollPanel = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
+            tab.Controls.Add(scrollPanel);
+            int y = 10;
+            int hintLeft = 250;
+            int hintWidth = 280;
+
+            chkAllowCaveBuilding = new CheckBox { Text = "允许在神器矿洞内建筑", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkAllowCaveBuilding);
+            scrollPanel.Controls.Add(new Label { Text = "(仅在PvE模式下生效)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkAllowFlyerCarry = new CheckBox { Text = "允许飞行龙抓人/野龙", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkAllowFlyerCarry);
+            scrollPanel.Controls.Add(new Label { Text = "(PvE模式默认关闭，开启后可抓野龙)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkDisableStructurePlacementCollision = new CheckBox { Text = "允许建筑穿模", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkDisableStructurePlacementCollision);
+            scrollPanel.Controls.Add(new Label { Text = "(可将建筑卡入地形/石头中)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkEnableCryoSickness = new CheckBox { Text = "启用低温症", Left = 20, Top = y, Width = 220, Checked = true };
+            scrollPanel.Controls.Add(chkEnableCryoSickness);
+            scrollPanel.Controls.Add(new Label { Text = "(关闭后丢出冷冻舱恐龙不会眩晕)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkShowFloatingDamage = new CheckBox { Text = "显示浮动伤害数字", Left = 20, Top = y, Width = 220, Checked = false };
+            scrollPanel.Controls.Add(chkShowFloatingDamage);
+            scrollPanel.Controls.Add(new Label { Text = "(攻击时头上冒出的伤害值)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkAllowThirdPerson = new CheckBox { Text = "允许第三人称视角", Left = 20, Top = y, Width = 220, Checked = true };
+            scrollPanel.Controls.Add(chkAllowThirdPerson);
+            scrollPanel.Controls.Add(new Label { Text = "(允许玩家滚轮切换到第三人称)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkServerCrosshair = new CheckBox { Text = "显示服务器准星", Left = 20, Top = y, Width = 220, Checked = true };
+            scrollPanel.Controls.Add(chkServerCrosshair);
+            scrollPanel.Controls.Add(new Label { Text = "(屏幕中间的十字准星)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            chkShowMapLocation = new CheckBox { Text = "在地图上显示玩家位置", Left = 20, Top = y, Width = 220, Checked = true };
+            scrollPanel.Controls.Add(chkShowMapLocation);
+            scrollPanel.Controls.Add(new Label { Text = "(按M打开地图能看到自己的大头针)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            y += rowHeight;
+
+            scrollPanel.Controls.Add(new Label { Text = "部落最大恐龙数:", Left = 20, Top = y, Width = lblWidth });
+            numMaxTamedDinos = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 1, Maximum = 10000, Value = 500 };
+            scrollPanel.Controls.Add(numMaxTamedDinos);
+            scrollPanel.Controls.Add(new Label { Text = "(每个部落允许拥有的最大恐龙数量)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+        }
+
         private void BuildBackupTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
         {
             int y = 20;
@@ -380,6 +551,31 @@ namespace ASAServerTool.UI
             numResourceRadius.Value = settings.ResourceNoReplenishRadiusPlayers > 0 ? settings.ResourceNoReplenishRadiusPlayers : 1.0m;
             numResourceRespawn.Value = settings.ResourcesRespawnPeriodMultiplier > 0 ? settings.ResourcesRespawnPeriodMultiplier : 1.0m;
 
+            numPlayerWaterDrain.Value = settings.PlayerCharacterWaterDrainMultiplier > 0 ? settings.PlayerCharacterWaterDrainMultiplier : 1.0m;
+            numPlayerFoodDrain.Value = settings.PlayerCharacterFoodDrainMultiplier > 0 ? settings.PlayerCharacterFoodDrainMultiplier : 1.0m;
+            numPlayerStaminaDrain.Value = settings.PlayerCharacterStaminaDrainMultiplier > 0 ? settings.PlayerCharacterStaminaDrainMultiplier : 1.0m;
+            numPlayerHealthRecovery.Value = settings.PlayerCharacterHealthRecoveryMultiplier > 0 ? settings.PlayerCharacterHealthRecoveryMultiplier : 1.0m;
+
+            numDinoFoodDrain.Value = settings.DinoCharacterFoodDrainMultiplier > 0 ? settings.DinoCharacterFoodDrainMultiplier : 1.0m;
+            numDinoStaminaDrain.Value = settings.DinoCharacterStaminaDrainMultiplier > 0 ? settings.DinoCharacterStaminaDrainMultiplier : 1.0m;
+            numDinoHealthRecovery.Value = settings.DinoCharacterHealthRecoveryMultiplier > 0 ? settings.DinoCharacterHealthRecoveryMultiplier : 1.0m;
+
+            numBabyCuddleInterval.Value = settings.BabyCuddleIntervalMultiplier > 0 ? settings.BabyCuddleIntervalMultiplier : 1.0m;
+            numBabyCuddleGrace.Value = settings.BabyCuddleGracePeriodMultiplier > 0 ? settings.BabyCuddleGracePeriodMultiplier : 1.0m;
+            numBabyCuddleLoseImprint.Value = settings.BabyCuddleLoseImprintQualitySpeedMultiplier > 0 ? settings.BabyCuddleLoseImprintQualitySpeedMultiplier : 1.0m;
+            numBabyImprintScale.Value = settings.BabyImprintingStatScaleMultiplier > 0 ? settings.BabyImprintingStatScaleMultiplier : 1.0m;
+            numBabyFoodConsume.Value = settings.BabyFoodConsumptionSpeedMultiplier > 0 ? settings.BabyFoodConsumptionSpeedMultiplier : 1.0m;
+
+            chkAllowCaveBuilding.Checked = settings.AllowCaveBuildingPvE;
+            chkAllowFlyerCarry.Checked = settings.AllowFlyerCarryPvE;
+            chkDisableStructurePlacementCollision.Checked = settings.DisableStructurePlacementCollision;
+            chkEnableCryoSickness.Checked = settings.EnableCryoSicknessPVE;
+            chkShowFloatingDamage.Checked = settings.ShowFloatingDamageText;
+            chkAllowThirdPerson.Checked = settings.AllowThirdPersonPlayer;
+            chkServerCrosshair.Checked = settings.ServerCrosshair;
+            chkShowMapLocation.Checked = settings.ShowMapPlayerLocation;
+            numMaxTamedDinos.Value = settings.MaxPersonalTamedDinos > 0 ? settings.MaxPersonalTamedDinos : 500;
+
             chkAutoBackup.Checked = settings.EnableAutoBackup;
             numBackupInterval.Value = settings.AutoBackupIntervalMinutes > 0 ? settings.AutoBackupIntervalMinutes : 60;
             txtBackupPath.Text = settings.CustomBackupPath;
@@ -419,6 +615,31 @@ namespace ASAServerTool.UI
             settings.NightTimeSpeedScale = numNightTime.Value;
             settings.ResourceNoReplenishRadiusPlayers = numResourceRadius.Value;
             settings.ResourcesRespawnPeriodMultiplier = numResourceRespawn.Value;
+
+            settings.PlayerCharacterWaterDrainMultiplier = numPlayerWaterDrain.Value;
+            settings.PlayerCharacterFoodDrainMultiplier = numPlayerFoodDrain.Value;
+            settings.PlayerCharacterStaminaDrainMultiplier = numPlayerStaminaDrain.Value;
+            settings.PlayerCharacterHealthRecoveryMultiplier = numPlayerHealthRecovery.Value;
+
+            settings.DinoCharacterFoodDrainMultiplier = numDinoFoodDrain.Value;
+            settings.DinoCharacterStaminaDrainMultiplier = numDinoStaminaDrain.Value;
+            settings.DinoCharacterHealthRecoveryMultiplier = numDinoHealthRecovery.Value;
+
+            settings.BabyCuddleIntervalMultiplier = numBabyCuddleInterval.Value;
+            settings.BabyCuddleGracePeriodMultiplier = numBabyCuddleGrace.Value;
+            settings.BabyCuddleLoseImprintQualitySpeedMultiplier = numBabyCuddleLoseImprint.Value;
+            settings.BabyImprintingStatScaleMultiplier = numBabyImprintScale.Value;
+            settings.BabyFoodConsumptionSpeedMultiplier = numBabyFoodConsume.Value;
+
+            settings.AllowCaveBuildingPvE = chkAllowCaveBuilding.Checked;
+            settings.AllowFlyerCarryPvE = chkAllowFlyerCarry.Checked;
+            settings.DisableStructurePlacementCollision = chkDisableStructurePlacementCollision.Checked;
+            settings.EnableCryoSicknessPVE = chkEnableCryoSickness.Checked;
+            settings.ShowFloatingDamageText = chkShowFloatingDamage.Checked;
+            settings.AllowThirdPersonPlayer = chkAllowThirdPerson.Checked;
+            settings.ServerCrosshair = chkServerCrosshair.Checked;
+            settings.ShowMapPlayerLocation = chkShowMapLocation.Checked;
+            settings.MaxPersonalTamedDinos = (int)numMaxTamedDinos.Value;
 
             settings.EnableAutoBackup = chkAutoBackup.Checked;
             settings.AutoBackupIntervalMinutes = (int)numBackupInterval.Value;
