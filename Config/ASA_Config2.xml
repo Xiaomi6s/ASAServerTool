@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ServerPath />
+  <MapName>TheIsland_WP</MapName>
+  <ServerName>My ASA Server</ServerName>
+  <ServerPassword />
+  <AdminPassword />
+  <MaxPlayers>70</MaxPlayers>
+  <Port>7777</Port>
+  <QueryPort>27015</QueryPort>
+  <Mods />
+  <BattleEye>true</BattleEye>
+  <Crossplay>true</Crossplay>
+  <ExtraArgs />
+  <XPMultiplier>3.0</XPMultiplier>
+  <TamingSpeedMultiplier>3.0</TamingSpeedMultiplier>
+  <HarvestAmountMultiplier>1.0</HarvestAmountMultiplier>
+  <DifficultyOffset>1.0</DifficultyOffset>
+  <MatingIntervalMultiplier>1.0</MatingIntervalMultiplier>
+  <EggHatchSpeedMultiplier>1.0</EggHatchSpeedMultiplier>
+  <BabyMatureSpeedMultiplier>1.0</BabyMatureSpeedMultiplier>
+  <DinoCountMultiplier>1.0</DinoCountMultiplier>
+  <DayTimeSpeedScale>0.1</DayTimeSpeedScale>
+  <NightTimeSpeedScale>1.0</NightTimeSpeedScale>
+  <ResourceNoReplenishRadiusPlayers>1.0</ResourceNoReplenishRadiusPlayers>
+  <ResourcesRespawnPeriodMultiplier>1.0</ResourcesRespawnPeriodMultiplier>
+  <EnableRCON>true</EnableRCON>
+  <RCONPort>27020</RCONPort>
+  <UseForceRespawnDinos>false</UseForceRespawnDinos>
+  <DisablePvE>true</DisablePvE>
+  <EnableAutoBackup>false</EnableAutoBackup>
+  <AutoBackupIntervalMinutes>60</AutoBackupIntervalMinutes>
+  <CustomBackupPath />
+</AppSettings>
