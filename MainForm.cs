@@ -23,6 +23,7 @@ namespace ASAServerTool
         {
             this.Text = "方舟飞升 (ASA) 开服工具";
             this.Size = new Size(620, 740);
+            this.MinimumSize = new Size(620, 740); // 防止缩得太小导致排版混乱
             this.StartPosition = FormStartPosition.CenterScreen;
 
             // 确保 Config 文件夹存在

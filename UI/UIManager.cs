@@ -122,7 +122,10 @@ namespace ASAServerTool.UI
             int txtWidth = 330;
             int rowHeight = 35;
 
-            tabControl = new TabControl { Left = 10, Top = 10, Width = 580, Height = 480 };
+            tabControl = new TabControl { 
+                Left = 10, Top = 10, Width = 580, Height = 480,
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+            };
             
             TabPage tabBasic = new TabPage("基础设置");
             TabPage tabWorld = new TabPage("世界规则");
@@ -755,7 +758,8 @@ namespace ASAServerTool.UI
             btnLoad = new Button { 
                 Text = "加载配置", Left = 30, Top = y, Width = 90, Height = 38, 
                 FlatStyle = FlatStyle.Flat, BackColor = Color.White, Cursor = Cursors.Hand,
-                Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular)
+                Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left
             };
             btnLoad.FlatAppearance.BorderColor = Color.Silver;
             btnLoad.Click += (s, e) => { if (loadAction != null) loadAction(); };
@@ -764,7 +768,8 @@ namespace ASAServerTool.UI
             btnSave = new Button { 
                 Text = "保存配置", Left = 135, Top = y, Width = 90, Height = 38, 
                 FlatStyle = FlatStyle.Flat, BackColor = Color.White, Cursor = Cursors.Hand,
-                Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular)
+                Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left
             };
             btnSave.FlatAppearance.BorderColor = Color.Silver;
             btnSave.Click += (s, e) => { if (saveAction != null) saveAction(); };
@@ -773,7 +778,8 @@ namespace ASAServerTool.UI
             btnStart = new Button { 
                 Text = "▶ 启动服务器", Left = 240, Top = y, Width = 330, Height = 38, 
                 FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(76, 175, 80), ForeColor = Color.White, Cursor = Cursors.Hand,
-                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold)
+                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
             btnStart.FlatAppearance.BorderSize = 0;
             btnStart.Click += (s, e) => { if (startAction != null) startAction(); };
@@ -784,7 +790,8 @@ namespace ASAServerTool.UI
                 Left = 10, Top = y, Width = 580, Height = 130, 
                 Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical,
                 BackColor = Color.FromArgb(30, 30, 30), ForeColor = Color.LightGray,
-                Font = new Font("Consolas", 9F, FontStyle.Regular)
+                Font = new Font("Consolas", 9F, FontStyle.Regular),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
             parentForm.Controls.Add(txtLog);
         }
