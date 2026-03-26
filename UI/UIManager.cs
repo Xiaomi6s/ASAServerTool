@@ -580,13 +580,13 @@ namespace ASAServerTool.UI
         private void BuildBackupTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
         {
             int y = 20;
-            int ctrlLeft = 150;
+            int ctrlLeft = 160; // 进一步增加间距以容纳更长的“自动备份间隔(分钟):”文本
 
             chkAutoBackup = new CheckBox { Text = "启用自动备份存档 (仅在此工具运行时生效)", Left = 20, Top = y, Width = 300, Checked = false };
             tab.Controls.Add(chkAutoBackup);
             y += rowHeight;
 
-            tab.Controls.Add(new Label { Text = "自动备份间隔(分钟):", Left = 20, Top = y, Width = lblWidth });
+            tab.Controls.Add(new Label { Text = "自动备份间隔(分钟):", Left = 20, Top = y, Width = lblWidth + 20 });
             numBackupInterval = new NumericUpDown { Left = ctrlLeft, Top = y, Width = 100, Minimum = 1, Maximum = 1440, Value = 60 };
             tab.Controls.Add(numBackupInterval);
             y += rowHeight;
