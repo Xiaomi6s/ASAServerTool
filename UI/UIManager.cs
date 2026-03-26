@@ -234,8 +234,9 @@ namespace ASAServerTool.UI
             tab.Controls.Add(scrollPanel);
 
             int currentY = 10;
-            int hintLeft = 230;
-            int hintWidth = 280;
+            int ctrlLeft = 150; // 统一输入框左侧间距
+            int hintLeft = 260; // 调整说明文字的左侧间距
+            int hintWidth = 250;
 
             // 1. 基础生存倍率
             GroupBox grpBasic = new GroupBox { Text = "基础生存倍率", Left = 10, Top = currentY, Width = 520, Height = 170 };
@@ -243,25 +244,25 @@ namespace ASAServerTool.UI
             int innerY = 25;
 
             grpBasic.Controls.Add(new Label { Text = "经验倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numXP = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numXP = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpBasic.Controls.Add(numXP);
             grpBasic.Controls.Add(new Label { Text = "(越大升级越快, 1.0为官服标准)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpBasic.Controls.Add(new Label { Text = "驯服倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numTaming = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numTaming = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpBasic.Controls.Add(numTaming);
             grpBasic.Controls.Add(new Label { Text = "(越大驯服越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpBasic.Controls.Add(new Label { Text = "采集倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numHarvest = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numHarvest = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpBasic.Controls.Add(numHarvest);
             grpBasic.Controls.Add(new Label { Text = "(越大单次采集资源越多)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpBasic.Controls.Add(new Label { Text = "游戏难度:", Left = 10, Top = innerY, Width = lblWidth });
-            numDifficulty = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numDifficulty = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpBasic.Controls.Add(numDifficulty);
             grpBasic.Controls.Add(new Label { Text = "(影响野生龙等级, 1.0通常对应150级满级)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             
@@ -273,19 +274,19 @@ namespace ASAServerTool.UI
             innerY = 25;
 
             grpBreed.Controls.Add(new Label { Text = "交配间隔倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numMating = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numMating = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpBreed.Controls.Add(numMating);
             grpBreed.Controls.Add(new Label { Text = "(越小交配冷却时间越短!)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.IndianRed });
             innerY += rowHeight;
 
             grpBreed.Controls.Add(new Label { Text = "孵化速度倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numHatching = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numHatching = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpBreed.Controls.Add(numHatching);
             grpBreed.Controls.Add(new Label { Text = "(越大蛋孵化越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpBreed.Controls.Add(new Label { Text = "宝宝成长倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numMature = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numMature = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 1000m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpBreed.Controls.Add(numMature);
             grpBreed.Controls.Add(new Label { Text = "(越大幼龙长大越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
 
@@ -297,31 +298,31 @@ namespace ASAServerTool.UI
             innerY = 25;
 
             grpEnv.Controls.Add(new Label { Text = "白天时间流逝:", Left = 10, Top = innerY, Width = lblWidth });
-            numDayTime = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numDayTime = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpEnv.Controls.Add(numDayTime);
             grpEnv.Controls.Add(new Label { Text = "(越小白天持续越久!)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.IndianRed });
             innerY += rowHeight;
 
             grpEnv.Controls.Add(new Label { Text = "夜晚时间流逝:", Left = 10, Top = innerY, Width = lblWidth });
-            numNightTime = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numNightTime = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpEnv.Controls.Add(numNightTime);
             grpEnv.Controls.Add(new Label { Text = "(越大黑夜过得越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpEnv.Controls.Add(new Label { Text = "恐龙刷新数量:", Left = 10, Top = innerY, Width = lblWidth });
-            numDinoCount = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numDinoCount = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpEnv.Controls.Add(numDinoCount);
-            grpEnv.Controls.Add(new Label { Text = "(全图野生龙总数, 谨慎调高以免卡顿)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            grpEnv.Controls.Add(new Label { Text = "(全图野生龙总数, 谨慎调高)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpEnv.Controls.Add(new Label { Text = "资源刷新周期:", Left = 10, Top = innerY, Width = lblWidth });
-            numResourceRespawn = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numResourceRespawn = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpEnv.Controls.Add(numResourceRespawn);
             grpEnv.Controls.Add(new Label { Text = "(越小树木/石头长出来越快!)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.IndianRed });
             innerY += rowHeight;
 
             grpEnv.Controls.Add(new Label { Text = "阻挡资源半径:", Left = 10, Top = innerY, Width = lblWidth });
-            numResourceRadius = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
+            numResourceRadius = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.1m, Maximum = 10m, DecimalPlaces = 1, Increment = 0.5m, Value = 1.0m };
             grpEnv.Controls.Add(numResourceRadius);
             grpEnv.Controls.Add(new Label { Text = "(越小资源离家越近)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
 
@@ -333,37 +334,37 @@ namespace ASAServerTool.UI
             innerY = 25;
 
             grpTime.Controls.Add(new Label { Text = "农作物生长速度:", Left = 10, Top = innerY, Width = lblWidth });
-            numCropGrowth = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
+            numCropGrowth = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
             grpTime.Controls.Add(numCropGrowth);
             grpTime.Controls.Add(new Label { Text = "(越大植物长得越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpTime.Controls.Add(new Label { Text = "排泄间隔倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numPoopInterval = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numPoopInterval = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpTime.Controls.Add(numPoopInterval);
             grpTime.Controls.Add(new Label { Text = "(越小恐龙拉屎越频繁)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpTime.Controls.Add(new Label { Text = "下蛋间隔倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numLayEggInterval = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numLayEggInterval = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpTime.Controls.Add(numLayEggInterval);
             grpTime.Controls.Add(new Label { Text = "(越小未受精蛋下得越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpTime.Controls.Add(new Label { Text = "全局腐败时间:", Left = 10, Top = innerY, Width = lblWidth });
-            numGlobalSpoilTime = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numGlobalSpoilTime = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpTime.Controls.Add(numGlobalSpoilTime);
             grpTime.Controls.Add(new Label { Text = "(越大肉类/果子腐坏越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpTime.Controls.Add(new Label { Text = "掉落物消失时间:", Left = 10, Top = innerY, Width = lblWidth });
-            numGlobalItemDecomp = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numGlobalItemDecomp = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpTime.Controls.Add(numGlobalItemDecomp);
             grpTime.Controls.Add(new Label { Text = "(越大扔在地上的物品消失越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpTime.Controls.Add(new Label { Text = "尸体消失时间:", Left = 10, Top = innerY, Width = lblWidth });
-            numGlobalCorpseDecomp = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numGlobalCorpseDecomp = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpTime.Controls.Add(numGlobalCorpseDecomp);
             grpTime.Controls.Add(new Label { Text = "(越大玩家/恐龙尸体存在越久)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
         }
@@ -374,8 +375,9 @@ namespace ASAServerTool.UI
             tab.Controls.Add(scrollPanel);
             
             int currentY = 10;
-            int hintLeft = 230;
-            int hintWidth = 280;
+            int ctrlLeft = 150; // 统一输入框左侧间距
+            int hintLeft = 260; // 调整说明文字的左侧间距
+            int hintWidth = 250;
 
             // 1. 玩家属性消耗
             GroupBox grpPlayerStats = new GroupBox { Text = "玩家属性消耗与恢复", Left = 10, Top = currentY, Width = 520, Height = 170 };
@@ -383,25 +385,25 @@ namespace ASAServerTool.UI
             int innerY = 25;
 
             grpPlayerStats.Controls.Add(new Label { Text = "玩家水分消耗:", Left = 10, Top = innerY, Width = lblWidth });
-            numPlayerWaterDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numPlayerWaterDrain = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpPlayerStats.Controls.Add(numPlayerWaterDrain);
             grpPlayerStats.Controls.Add(new Label { Text = "(越小口渴越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpPlayerStats.Controls.Add(new Label { Text = "玩家食物消耗:", Left = 10, Top = innerY, Width = lblWidth });
-            numPlayerFoodDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numPlayerFoodDrain = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpPlayerStats.Controls.Add(numPlayerFoodDrain);
             grpPlayerStats.Controls.Add(new Label { Text = "(越小饥饿越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpPlayerStats.Controls.Add(new Label { Text = "玩家耐力消耗:", Left = 10, Top = innerY, Width = lblWidth });
-            numPlayerStaminaDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numPlayerStaminaDrain = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpPlayerStats.Controls.Add(numPlayerStaminaDrain);
             grpPlayerStats.Controls.Add(new Label { Text = "(越小耐力掉得越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpPlayerStats.Controls.Add(new Label { Text = "玩家生命恢复:", Left = 10, Top = innerY, Width = lblWidth });
-            numPlayerHealthRecovery = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numPlayerHealthRecovery = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpPlayerStats.Controls.Add(numPlayerHealthRecovery);
             grpPlayerStats.Controls.Add(new Label { Text = "(越大回血越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             
@@ -413,19 +415,19 @@ namespace ASAServerTool.UI
             innerY = 25;
 
             grpDinoStats.Controls.Add(new Label { Text = "恐龙食物消耗:", Left = 10, Top = innerY, Width = lblWidth });
-            numDinoFoodDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numDinoFoodDrain = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpDinoStats.Controls.Add(numDinoFoodDrain);
             grpDinoStats.Controls.Add(new Label { Text = "(越小恐龙饥饿越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpDinoStats.Controls.Add(new Label { Text = "恐龙耐力消耗:", Left = 10, Top = innerY, Width = lblWidth });
-            numDinoStaminaDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numDinoStaminaDrain = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpDinoStats.Controls.Add(numDinoStaminaDrain);
             grpDinoStats.Controls.Add(new Label { Text = "(越小恐龙耐力掉得越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpDinoStats.Controls.Add(new Label { Text = "恐龙生命恢复:", Left = 10, Top = innerY, Width = lblWidth });
-            numDinoHealthRecovery = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numDinoHealthRecovery = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpDinoStats.Controls.Add(numDinoHealthRecovery);
             grpDinoStats.Controls.Add(new Label { Text = "(越大恐龙回血越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
 
@@ -437,31 +439,31 @@ namespace ASAServerTool.UI
             innerY = 25;
 
             grpImprint.Controls.Add(new Label { Text = "留痕间隔倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numBabyCuddleInterval = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numBabyCuddleInterval = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpImprint.Controls.Add(numBabyCuddleInterval);
             grpImprint.Controls.Add(new Label { Text = "(越小越频繁要求留痕)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpImprint.Controls.Add(new Label { Text = "留痕宽限期倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numBabyCuddleGrace = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numBabyCuddleGrace = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpImprint.Controls.Add(numBabyCuddleGrace);
             grpImprint.Controls.Add(new Label { Text = "(越大允许你迟到的时间越久)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpImprint.Controls.Add(new Label { Text = "掉分速度倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numBabyCuddleLoseImprint = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numBabyCuddleLoseImprint = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpImprint.Controls.Add(numBabyCuddleLoseImprint);
             grpImprint.Controls.Add(new Label { Text = "(越小错过留痕掉的分越少)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpImprint.Controls.Add(new Label { Text = "单次加成倍率:", Left = 10, Top = innerY, Width = lblWidth });
-            numBabyImprintScale = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
+            numBabyImprintScale = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
             grpImprint.Controls.Add(numBabyImprintScale);
             grpImprint.Controls.Add(new Label { Text = "(越大每次给的留痕度越多)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
             innerY += rowHeight;
 
             grpImprint.Controls.Add(new Label { Text = "幼龙食物消耗:", Left = 10, Top = innerY, Width = lblWidth });
-            numBabyFoodConsume = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            numBabyFoodConsume = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
             grpImprint.Controls.Add(numBabyFoodConsume);
             grpImprint.Controls.Add(new Label { Text = "(越小宝宝饿得越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
         }
