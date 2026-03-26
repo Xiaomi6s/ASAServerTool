@@ -114,8 +114,8 @@ namespace ASAServerTool.UI
 
         public void InitializeComponents()
         {
-            int lblWidth = 120;
-            int txtWidth = 350;
+            int lblWidth = 140; // 增加 Label 宽度以防止文字显示不全
+            int txtWidth = 330;
             int rowHeight = 35;
 
             tabControl = new TabControl { Left = 10, Top = 10, Width = 560, Height = 450 };
@@ -149,61 +149,83 @@ namespace ASAServerTool.UI
 
         private void BuildBasicTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
         {
-            int y = 20;
+            Panel scrollPanel = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
+            tab.Controls.Add(scrollPanel);
 
-            tab.Controls.Add(new Label { Text = "服务端路径:", Left = 20, Top = y, Width = lblWidth });
-            txtPath = new TextBox { Left = 140, Top = y, Width = txtWidth - 40 };
-            tab.Controls.Add(txtPath);
-            btnBrowse = new Button { Text = "...", Left = 140 + txtWidth - 30, Top = y - 2, Width = 30 };
+            int currentY = 10;
+            int innerY = 25;
+
+            // 1. 核心服务器信息
+            GroupBox grpCore = new GroupBox { Text = "核心服务器信息", Left = 10, Top = currentY, Width = 520, Height = 210 };
+            scrollPanel.Controls.Add(grpCore);
+
+            int ctrlLeft = 150; // 统一调整输入控件的左侧间距
+
+            grpCore.Controls.Add(new Label { Text = "服务端路径:", Left = 10, Top = innerY, Width = lblWidth });
+            txtPath = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth - 40 };
+            grpCore.Controls.Add(txtPath);
+            btnBrowse = new Button { Text = "...", Left = ctrlLeft + txtWidth - 30, Top = innerY - 2, Width = 30 };
             btnBrowse.Click += (s, e) => { if (browseAction != null) browseAction(); };
-            tab.Controls.Add(btnBrowse);
-            y += rowHeight;
+            grpCore.Controls.Add(btnBrowse);
+            innerY += rowHeight;
 
-            tab.Controls.Add(new Label { Text = "地图名称:", Left = 20, Top = y, Width = lblWidth });
-            cmbMap = new ComboBox { Left = 140, Top = y, Width = txtWidth, DropDownStyle = ComboBoxStyle.DropDown };
+            grpCore.Controls.Add(new Label { Text = "地图名称:", Left = 10, Top = innerY, Width = lblWidth });
+            cmbMap = new ComboBox { Left = ctrlLeft, Top = innerY, Width = txtWidth, DropDownStyle = ComboBoxStyle.DropDown };
             cmbMap.Items.AddRange(new object[] {
                 "TheIsland_WP",
                 "ScorchedEarth_WP",
                 "TheCenter_WP",
                 "Aberration_WP",
-                "Extinction_WP"
+                "Extinction_WP",
+                "LostIsland_WP",
+                "Fjordur_WP",
+                "Genesis_WP",
+                "Valguero_WP",
+                "Ragnarok_WP",
+                "CrystalIsles_WP"
             });
-            tab.Controls.Add(cmbMap);
-            y += rowHeight;
+            grpCore.Controls.Add(cmbMap);
+            innerY += rowHeight;
 
-            tab.Controls.Add(new Label { Text = "服务器名称:", Left = 20, Top = y, Width = lblWidth });
-            txtName = new TextBox { Left = 140, Top = y, Width = txtWidth };
-            tab.Controls.Add(txtName);
-            y += rowHeight;
+            grpCore.Controls.Add(new Label { Text = "服务器名称:", Left = 10, Top = innerY, Width = lblWidth });
+            txtName = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpCore.Controls.Add(txtName);
+            innerY += rowHeight;
 
-            tab.Controls.Add(new Label { Text = "服务器密码:", Left = 20, Top = y, Width = lblWidth });
-            txtPass = new TextBox { Left = 140, Top = y, Width = txtWidth };
-            tab.Controls.Add(txtPass);
-            y += rowHeight;
+            grpCore.Controls.Add(new Label { Text = "服务器密码:", Left = 10, Top = innerY, Width = lblWidth });
+            txtPass = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpCore.Controls.Add(txtPass);
+            innerY += rowHeight;
 
-            tab.Controls.Add(new Label { Text = "管理员密码:", Left = 20, Top = y, Width = lblWidth });
-            txtAdminPass = new TextBox { Left = 140, Top = y, Width = txtWidth };
-            tab.Controls.Add(txtAdminPass);
-            y += rowHeight;
+            grpCore.Controls.Add(new Label { Text = "管理员密码:", Left = 10, Top = innerY, Width = lblWidth });
+            txtAdminPass = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpCore.Controls.Add(txtAdminPass);
+            
+            currentY += grpCore.Height + 10;
 
-            tab.Controls.Add(new Label { Text = "最大玩家数:", Left = 20, Top = y, Width = lblWidth });
-            numMaxPlayers = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 1, Maximum = 200, Value = 70 };
-            tab.Controls.Add(numMaxPlayers);
-            y += rowHeight;
+            // 2. 网络与内容
+            GroupBox grpNet = new GroupBox { Text = "网络与内容设置", Left = 10, Top = currentY, Width = 520, Height = 170 };
+            scrollPanel.Controls.Add(grpNet);
+            innerY = 25;
 
-            tab.Controls.Add(new Label { Text = "游戏端口:", Left = 20, Top = y, Width = lblWidth });
-            txtPort = new TextBox { Left = 140, Top = y, Width = 100 };
-            tab.Controls.Add(txtPort);
-            y += rowHeight;
+            grpNet.Controls.Add(new Label { Text = "最大玩家数:", Left = 10, Top = innerY, Width = lblWidth });
+            numMaxPlayers = new NumericUpDown { Left = ctrlLeft, Top = innerY, Width = 100, Minimum = 1, Maximum = 200, Value = 70 };
+            grpNet.Controls.Add(numMaxPlayers);
+            innerY += rowHeight;
 
-            tab.Controls.Add(new Label { Text = "查询端口:", Left = 20, Top = y, Width = lblWidth });
-            txtQueryPort = new TextBox { Left = 140, Top = y, Width = 100 };
-            tab.Controls.Add(txtQueryPort);
-            y += rowHeight;
+            grpNet.Controls.Add(new Label { Text = "游戏端口:", Left = 10, Top = innerY, Width = lblWidth });
+            txtPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100 };
+            grpNet.Controls.Add(txtPort);
+            innerY += rowHeight;
 
-            tab.Controls.Add(new Label { Text = "Mod ID(逗号分隔):", Left = 20, Top = y, Width = lblWidth });
-            txtMods = new TextBox { Left = 140, Top = y, Width = txtWidth };
-            tab.Controls.Add(txtMods);
+            grpNet.Controls.Add(new Label { Text = "查询端口:", Left = 10, Top = innerY, Width = lblWidth });
+            txtQueryPort = new TextBox { Left = ctrlLeft, Top = innerY, Width = 100 };
+            grpNet.Controls.Add(txtQueryPort);
+            innerY += rowHeight;
+
+            grpNet.Controls.Add(new Label { Text = "Mod ID(逗号分隔):", Left = 10, Top = innerY, Width = lblWidth });
+            txtMods = new TextBox { Left = ctrlLeft, Top = innerY, Width = txtWidth };
+            grpNet.Controls.Add(txtMods);
         }
 
         private void BuildWorldTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
@@ -350,167 +372,206 @@ namespace ASAServerTool.UI
         {
             Panel scrollPanel = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
             tab.Controls.Add(scrollPanel);
-            int y = 10;
-            int hintLeft = 250;
+            
+            int currentY = 10;
+            int hintLeft = 230;
             int hintWidth = 280;
 
-            scrollPanel.Controls.Add(new Label { Text = "玩家水分消耗:", Left = 20, Top = y, Width = lblWidth });
-            numPlayerWaterDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numPlayerWaterDrain);
-            scrollPanel.Controls.Add(new Label { Text = "(越小口渴越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            // 1. 玩家属性消耗
+            GroupBox grpPlayerStats = new GroupBox { Text = "玩家属性消耗与恢复", Left = 10, Top = currentY, Width = 520, Height = 170 };
+            scrollPanel.Controls.Add(grpPlayerStats);
+            int innerY = 25;
 
-            scrollPanel.Controls.Add(new Label { Text = "玩家食物消耗:", Left = 20, Top = y, Width = lblWidth });
-            numPlayerFoodDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numPlayerFoodDrain);
-            scrollPanel.Controls.Add(new Label { Text = "(越小饥饿越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            grpPlayerStats.Controls.Add(new Label { Text = "玩家水分消耗:", Left = 10, Top = innerY, Width = lblWidth });
+            numPlayerWaterDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpPlayerStats.Controls.Add(numPlayerWaterDrain);
+            grpPlayerStats.Controls.Add(new Label { Text = "(越小口渴越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            scrollPanel.Controls.Add(new Label { Text = "玩家耐力消耗:", Left = 20, Top = y, Width = lblWidth });
-            numPlayerStaminaDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numPlayerStaminaDrain);
-            scrollPanel.Controls.Add(new Label { Text = "(越小耐力掉得越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            grpPlayerStats.Controls.Add(new Label { Text = "玩家食物消耗:", Left = 10, Top = innerY, Width = lblWidth });
+            numPlayerFoodDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpPlayerStats.Controls.Add(numPlayerFoodDrain);
+            grpPlayerStats.Controls.Add(new Label { Text = "(越小饥饿越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            scrollPanel.Controls.Add(new Label { Text = "玩家生命恢复:", Left = 20, Top = y, Width = lblWidth });
-            numPlayerHealthRecovery = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numPlayerHealthRecovery);
-            scrollPanel.Controls.Add(new Label { Text = "(越大回血越快)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            grpPlayerStats.Controls.Add(new Label { Text = "玩家耐力消耗:", Left = 10, Top = innerY, Width = lblWidth });
+            numPlayerStaminaDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpPlayerStats.Controls.Add(numPlayerStaminaDrain);
+            grpPlayerStats.Controls.Add(new Label { Text = "(越小耐力掉得越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            scrollPanel.Controls.Add(new Label { Text = "恐龙食物消耗:", Left = 20, Top = y, Width = lblWidth });
-            numDinoFoodDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numDinoFoodDrain);
-            scrollPanel.Controls.Add(new Label { Text = "(越小恐龙饥饿越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            grpPlayerStats.Controls.Add(new Label { Text = "玩家生命恢复:", Left = 10, Top = innerY, Width = lblWidth });
+            numPlayerHealthRecovery = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpPlayerStats.Controls.Add(numPlayerHealthRecovery);
+            grpPlayerStats.Controls.Add(new Label { Text = "(越大回血越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            
+            currentY += grpPlayerStats.Height + 10;
 
-            scrollPanel.Controls.Add(new Label { Text = "恐龙耐力消耗:", Left = 20, Top = y, Width = lblWidth });
-            numDinoStaminaDrain = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numDinoStaminaDrain);
-            scrollPanel.Controls.Add(new Label { Text = "(越小恐龙耐力掉得越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            // 2. 恐龙属性消耗
+            GroupBox grpDinoStats = new GroupBox { Text = "恐龙属性消耗与恢复", Left = 10, Top = currentY, Width = 520, Height = 135 };
+            scrollPanel.Controls.Add(grpDinoStats);
+            innerY = 25;
 
-            scrollPanel.Controls.Add(new Label { Text = "恐龙生命恢复:", Left = 20, Top = y, Width = lblWidth });
-            numDinoHealthRecovery = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numDinoHealthRecovery);
-            scrollPanel.Controls.Add(new Label { Text = "(越大恐龙回血越快)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            grpDinoStats.Controls.Add(new Label { Text = "恐龙食物消耗:", Left = 10, Top = innerY, Width = lblWidth });
+            numDinoFoodDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpDinoStats.Controls.Add(numDinoFoodDrain);
+            grpDinoStats.Controls.Add(new Label { Text = "(越小恐龙饥饿越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            scrollPanel.Controls.Add(new Label { Text = "--- 留痕高级设置 ---", Left = 20, Top = y, Width = 200, ForeColor = Color.Blue });
-            y += rowHeight;
+            grpDinoStats.Controls.Add(new Label { Text = "恐龙耐力消耗:", Left = 10, Top = innerY, Width = lblWidth });
+            numDinoStaminaDrain = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpDinoStats.Controls.Add(numDinoStaminaDrain);
+            grpDinoStats.Controls.Add(new Label { Text = "(越小恐龙耐力掉得越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            scrollPanel.Controls.Add(new Label { Text = "留痕间隔倍率:", Left = 20, Top = y, Width = lblWidth });
-            numBabyCuddleInterval = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numBabyCuddleInterval);
-            scrollPanel.Controls.Add(new Label { Text = "(越小越频繁要求留痕)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            grpDinoStats.Controls.Add(new Label { Text = "恐龙生命恢复:", Left = 10, Top = innerY, Width = lblWidth });
+            numDinoHealthRecovery = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 10m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpDinoStats.Controls.Add(numDinoHealthRecovery);
+            grpDinoStats.Controls.Add(new Label { Text = "(越大恐龙回血越快)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
 
-            scrollPanel.Controls.Add(new Label { Text = "留痕宽限期倍率:", Left = 20, Top = y, Width = lblWidth });
-            numBabyCuddleGrace = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numBabyCuddleGrace);
-            scrollPanel.Controls.Add(new Label { Text = "(越大允许你迟到的时间越久)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            currentY += grpDinoStats.Height + 10;
 
-            scrollPanel.Controls.Add(new Label { Text = "留痕掉分速度倍率:", Left = 20, Top = y, Width = lblWidth });
-            numBabyCuddleLoseImprint = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numBabyCuddleLoseImprint);
-            scrollPanel.Controls.Add(new Label { Text = "(越小错过留痕掉的分越少)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            // 3. 留痕高级设置
+            GroupBox grpImprint = new GroupBox { Text = "留痕高级设置", Left = 10, Top = currentY, Width = 520, Height = 205 };
+            scrollPanel.Controls.Add(grpImprint);
+            innerY = 25;
 
-            scrollPanel.Controls.Add(new Label { Text = "单次留痕加成倍率:", Left = 20, Top = y, Width = lblWidth });
-            numBabyImprintScale = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
-            scrollPanel.Controls.Add(numBabyImprintScale);
-            scrollPanel.Controls.Add(new Label { Text = "(越大每次给的留痕度越多)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            grpImprint.Controls.Add(new Label { Text = "留痕间隔倍率:", Left = 10, Top = innerY, Width = lblWidth });
+            numBabyCuddleInterval = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpImprint.Controls.Add(numBabyCuddleInterval);
+            grpImprint.Controls.Add(new Label { Text = "(越小越频繁要求留痕)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            scrollPanel.Controls.Add(new Label { Text = "幼龙食物消耗:", Left = 20, Top = y, Width = lblWidth });
-            numBabyFoodConsume = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
-            scrollPanel.Controls.Add(numBabyFoodConsume);
-            scrollPanel.Controls.Add(new Label { Text = "(越小宝宝饿得越慢)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
+            grpImprint.Controls.Add(new Label { Text = "留痕宽限期倍率:", Left = 10, Top = innerY, Width = lblWidth });
+            numBabyCuddleGrace = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpImprint.Controls.Add(numBabyCuddleGrace);
+            grpImprint.Controls.Add(new Label { Text = "(越大允许你迟到的时间越久)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            grpImprint.Controls.Add(new Label { Text = "掉分速度倍率:", Left = 10, Top = innerY, Width = lblWidth });
+            numBabyCuddleLoseImprint = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpImprint.Controls.Add(numBabyCuddleLoseImprint);
+            grpImprint.Controls.Add(new Label { Text = "(越小错过留痕掉的分越少)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            grpImprint.Controls.Add(new Label { Text = "单次加成倍率:", Left = 10, Top = innerY, Width = lblWidth });
+            numBabyImprintScale = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 1000m, DecimalPlaces = 2, Increment = 0.5m, Value = 1.0m };
+            grpImprint.Controls.Add(numBabyImprintScale);
+            grpImprint.Controls.Add(new Label { Text = "(越大每次给的留痕度越多)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            grpImprint.Controls.Add(new Label { Text = "幼龙食物消耗:", Left = 10, Top = innerY, Width = lblWidth });
+            numBabyFoodConsume = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 0.01m, Maximum = 100m, DecimalPlaces = 2, Increment = 0.1m, Value = 1.0m };
+            grpImprint.Controls.Add(numBabyFoodConsume);
+            grpImprint.Controls.Add(new Label { Text = "(越小宝宝饿得越慢)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
         }
 
         private void BuildRulesTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
         {
             Panel scrollPanel = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
             tab.Controls.Add(scrollPanel);
-            int y = 10;
-            int hintLeft = 250;
+            
+            int currentY = 10;
+            int hintLeft = 230;
             int hintWidth = 280;
 
-            chkAllowCaveBuilding = new CheckBox { Text = "允许在神器矿洞内建筑", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkAllowCaveBuilding);
-            scrollPanel.Controls.Add(new Label { Text = "(仅在PvE模式下生效)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            // 1. PvE与建筑规则
+            GroupBox grpPvE = new GroupBox { Text = "PvE与建筑规则", Left = 10, Top = currentY, Width = 520, Height = 170 };
+            scrollPanel.Controls.Add(grpPvE);
+            int innerY = 25;
 
-            chkAllowFlyerCarry = new CheckBox { Text = "允许飞行龙抓人/野龙", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkAllowFlyerCarry);
-            scrollPanel.Controls.Add(new Label { Text = "(PvE模式默认关闭，开启后可抓野龙)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkAllowCaveBuilding = new CheckBox { Text = "允许在神器矿洞内建筑", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpPvE.Controls.Add(chkAllowCaveBuilding);
+            grpPvE.Controls.Add(new Label { Text = "(仅在PvE模式下生效)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkDisableStructurePlacementCollision = new CheckBox { Text = "允许建筑穿模", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkDisableStructurePlacementCollision);
-            scrollPanel.Controls.Add(new Label { Text = "(可将建筑卡入地形/石头中)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkAllowFlyerCarry = new CheckBox { Text = "允许飞行龙抓人/野龙", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpPvE.Controls.Add(chkAllowFlyerCarry);
+            grpPvE.Controls.Add(new Label { Text = "(PvE模式默认关闭，开启后可抓野龙)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkEnableCryoSickness = new CheckBox { Text = "启用低温症", Left = 20, Top = y, Width = 220, Checked = true };
-            scrollPanel.Controls.Add(chkEnableCryoSickness);
-            scrollPanel.Controls.Add(new Label { Text = "(关闭后丢出冷冻舱恐龙不会眩晕)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkDisableStructurePlacementCollision = new CheckBox { Text = "允许建筑穿模", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpPvE.Controls.Add(chkDisableStructurePlacementCollision);
+            grpPvE.Controls.Add(new Label { Text = "(可将建筑卡入地形/石头中)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkShowFloatingDamage = new CheckBox { Text = "显示浮动伤害数字", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkShowFloatingDamage);
-            scrollPanel.Controls.Add(new Label { Text = "(攻击时头上冒出的伤害值)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkDisableDinoDecay = new CheckBox { Text = "关闭恐龙随时间饿死/销毁", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpPvE.Controls.Add(chkDisableDinoDecay);
+            grpPvE.Controls.Add(new Label { Text = "(PvE模式下恐龙长时间不喂食不会死亡)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            
+            currentY += grpPvE.Height + 10;
 
-            chkAllowThirdPerson = new CheckBox { Text = "允许第三人称视角", Left = 20, Top = y, Width = 220, Checked = true };
-            scrollPanel.Controls.Add(chkAllowThirdPerson);
-            scrollPanel.Controls.Add(new Label { Text = "(允许玩家滚轮切换到第三人称)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            // 2. 玩家UI与交互
+            GroupBox grpUI = new GroupBox { Text = "玩家UI与交互设置", Left = 10, Top = currentY, Width = 520, Height = 205 };
+            scrollPanel.Controls.Add(grpUI);
+            innerY = 25;
 
-            chkServerCrosshair = new CheckBox { Text = "显示服务器准星", Left = 20, Top = y, Width = 220, Checked = true };
-            scrollPanel.Controls.Add(chkServerCrosshair);
-            scrollPanel.Controls.Add(new Label { Text = "(屏幕中间的十字准星)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkShowFloatingDamage = new CheckBox { Text = "显示浮动伤害数字", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpUI.Controls.Add(chkShowFloatingDamage);
+            grpUI.Controls.Add(new Label { Text = "(攻击时头上冒出的伤害值)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkShowMapLocation = new CheckBox { Text = "在地图上显示玩家位置", Left = 20, Top = y, Width = 220, Checked = true };
-            scrollPanel.Controls.Add(chkShowMapLocation);
-            scrollPanel.Controls.Add(new Label { Text = "(按M打开地图能看到自己的大头针)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkAllowThirdPerson = new CheckBox { Text = "允许第三人称视角", Left = 10, Top = innerY, Width = 220, Checked = true };
+            grpUI.Controls.Add(chkAllowThirdPerson);
+            grpUI.Controls.Add(new Label { Text = "(允许玩家滚轮切换到第三人称)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            scrollPanel.Controls.Add(new Label { Text = "部落最大恐龙数:", Left = 20, Top = y, Width = lblWidth });
-            numMaxTamedDinos = new NumericUpDown { Left = 140, Top = y, Width = 100, Minimum = 1, Maximum = 10000, Value = 500 };
-            scrollPanel.Controls.Add(numMaxTamedDinos);
-            scrollPanel.Controls.Add(new Label { Text = "(每个部落允许拥有的最大恐龙数量)", Left = hintLeft, Top = y+2, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkServerCrosshair = new CheckBox { Text = "显示服务器准星", Left = 10, Top = innerY, Width = 220, Checked = true };
+            grpUI.Controls.Add(chkServerCrosshair);
+            grpUI.Controls.Add(new Label { Text = "(屏幕中间的十字准星)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkEnableProximityChat = new CheckBox { Text = "开启近距离语音聊天", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkEnableProximityChat);
-            scrollPanel.Controls.Add(new Label { Text = "(只有靠近的人才能听到语音)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkShowMapLocation = new CheckBox { Text = "在地图上显示玩家位置", Left = 10, Top = innerY, Width = 220, Checked = true };
+            grpUI.Controls.Add(chkShowMapLocation);
+            grpUI.Controls.Add(new Label { Text = "(按M打开地图能看到自己的大头针)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkDisableDinoDecay = new CheckBox { Text = "关闭恐龙随时间饿死/销毁", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkDisableDinoDecay);
-            scrollPanel.Controls.Add(new Label { Text = "(PvE模式下恐龙长时间不喂食不会死亡)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkEnableProximityChat = new CheckBox { Text = "开启近距离语音聊天", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpUI.Controls.Add(chkEnableProximityChat);
+            grpUI.Controls.Add(new Label { Text = "(只有靠近的人才能听到语音)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
 
-            chkAllowAnyoneImprint = new CheckBox { Text = "允许任何人进行恐龙留痕", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkAllowAnyoneImprint);
-            scrollPanel.Controls.Add(new Label { Text = "(不仅限于孵化者，部落成员都可以抚摸)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            currentY += grpUI.Height + 10;
 
-            chkPreventOfflinePvP = new CheckBox { Text = "开启离线保护 (ORP)", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkPreventOfflinePvP);
-            scrollPanel.Controls.Add(new Label { Text = "(玩家离线后建筑和恐龙免疫伤害)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            // 3. 其他游戏规则
+            GroupBox grpOther = new GroupBox { Text = "其他游戏规则", Left = 10, Top = currentY, Width = 520, Height = 205 };
+            scrollPanel.Controls.Add(grpOther);
+            innerY = 25;
 
-            chkUseCorpseLocator = new CheckBox { Text = "启用尸体定位光柱", Left = 20, Top = y, Width = 220, Checked = true };
-            scrollPanel.Controls.Add(chkUseCorpseLocator);
-            scrollPanel.Controls.Add(new Label { Text = "(死后尸体上方会有一道冲天光柱)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
-            y += rowHeight;
+            chkEnableCryoSickness = new CheckBox { Text = "启用低温症", Left = 10, Top = innerY, Width = 220, Checked = true };
+            grpOther.Controls.Add(chkEnableCryoSickness);
+            grpOther.Controls.Add(new Label { Text = "(关闭后丢出冷冻舱恐龙不会眩晕)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkDisableWeatherFog = new CheckBox { Text = "强制关闭天气大雾", Left = 20, Top = y, Width = 220, Checked = false };
-            scrollPanel.Controls.Add(chkDisableWeatherFog);
-            scrollPanel.Controls.Add(new Label { Text = "(服务器级别禁用起雾天气，提升视野)", Left = hintLeft, Top = y+4, Width = hintWidth, ForeColor = Color.Gray });
+            chkAllowAnyoneImprint = new CheckBox { Text = "允许任何人进行恐龙留痕", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpOther.Controls.Add(chkAllowAnyoneImprint);
+            grpOther.Controls.Add(new Label { Text = "(不仅限于孵化者，部落成员都可以抚摸)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            chkPreventOfflinePvP = new CheckBox { Text = "开启离线保护 (ORP)", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpOther.Controls.Add(chkPreventOfflinePvP);
+            grpOther.Controls.Add(new Label { Text = "(玩家离线后建筑和恐龙免疫伤害)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            chkUseCorpseLocator = new CheckBox { Text = "启用尸体定位光柱", Left = 10, Top = innerY, Width = 220, Checked = true };
+            grpOther.Controls.Add(chkUseCorpseLocator);
+            grpOther.Controls.Add(new Label { Text = "(死后尸体上方会有一道冲天光柱)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            chkDisableWeatherFog = new CheckBox { Text = "强制关闭天气大雾", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpOther.Controls.Add(chkDisableWeatherFog);
+            grpOther.Controls.Add(new Label { Text = "(服务器级别禁用起雾天气，提升视野)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            
+            currentY += grpOther.Height + 10;
+            
+            // 4. 数值限制
+            GroupBox grpLimit = new GroupBox { Text = "限制规则", Left = 10, Top = currentY, Width = 520, Height = 65 };
+            scrollPanel.Controls.Add(grpLimit);
+            innerY = 25;
+
+            grpLimit.Controls.Add(new Label { Text = "部落最大恐龙数:", Left = 10, Top = innerY, Width = lblWidth });
+            numMaxTamedDinos = new NumericUpDown { Left = 120, Top = innerY, Width = 100, Minimum = 1, Maximum = 10000, Value = 500 };
+            grpLimit.Controls.Add(numMaxTamedDinos);
+            grpLimit.Controls.Add(new Label { Text = "(每个部落允许拥有的最大恐龙数量)", Left = hintLeft, Top = innerY+2, Width = hintWidth, ForeColor = Color.Gray });
         }
 
         private void BuildBackupTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
@@ -543,34 +604,63 @@ namespace ASAServerTool.UI
 
         private void BuildAdvancedTab(TabPage tab, int lblWidth, int txtWidth, int rowHeight)
         {
-            int y = 20;
+            Panel scrollPanel = new Panel { Dock = DockStyle.Fill, AutoScroll = true };
+            tab.Controls.Add(scrollPanel);
 
-            chkPvE = new CheckBox { Text = "启用 PvE 模式 (否则为 PvP)", Left = 20, Top = y, Width = txtWidth, Checked = false };
-            tab.Controls.Add(chkPvE);
-            y += rowHeight;
+            int currentY = 10;
+            int hintLeft = 230;
+            int hintWidth = 280;
 
-            chkBattleEye = new CheckBox { Text = "启用 BattleEye 反作弊", Left = 20, Top = y, Width = txtWidth, Checked = true };
-            tab.Controls.Add(chkBattleEye);
-            y += rowHeight;
+            // 1. RCON 与 远程管理
+            GroupBox grpRCON = new GroupBox { Text = "RCON 与 远程管理", Left = 10, Top = currentY, Width = 520, Height = 100 };
+            scrollPanel.Controls.Add(grpRCON);
+            int innerY = 25;
 
-            chkCrossplay = new CheckBox { Text = "启用全平台跨平台联机 (Crossplay)", Left = 20, Top = y, Width = txtWidth, Checked = true };
-            tab.Controls.Add(chkCrossplay);
-            y += rowHeight;
+            chkRCON = new CheckBox { Text = "启用 RCON 远程控制", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpRCON.Controls.Add(chkRCON);
+            grpRCON.Controls.Add(new Label { Text = "(允许通过第三方工具远程管理服务器)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
 
-            chkRCON = new CheckBox { Text = "启用 RCON 远程管理", Left = 20, Top = y, Width = 150, Checked = true };
-            tab.Controls.Add(chkRCON);
-            tab.Controls.Add(new Label { Text = "端口:", Left = 180, Top = y+4, Width = 40 });
-            txtRCONPort = new TextBox { Left = 220, Top = y, Width = 80 };
-            tab.Controls.Add(txtRCONPort);
-            y += rowHeight;
+            grpRCON.Controls.Add(new Label { Text = "RCON 端口:", Left = 10, Top = innerY, Width = lblWidth });
+            txtRCONPort = new TextBox { Left = 120, Top = innerY, Width = 100 };
+            grpRCON.Controls.Add(txtRCONPort);
+            
+            currentY += grpRCON.Height + 10;
 
-            chkForceRespawn = new CheckBox { Text = "启动时强制刷新野生恐龙 (-ForceRespawnDinos)", Left = 20, Top = y, Width = 400, Checked = false };
-            tab.Controls.Add(chkForceRespawn);
-            y += rowHeight;
+            // 2. 跨平台与反作弊
+            GroupBox grpPlatform = new GroupBox { Text = "跨平台与反作弊", Left = 10, Top = currentY, Width = 520, Height = 100 };
+            scrollPanel.Controls.Add(grpPlatform);
+            innerY = 25;
 
-            tab.Controls.Add(new Label { Text = "额外启动参数:", Left = 20, Top = y, Width = lblWidth });
-            txtExtraArgs = new TextBox { Left = 140, Top = y, Width = txtWidth };
-            tab.Controls.Add(txtExtraArgs);
+            chkCrossplay = new CheckBox { Text = "启用跨平台游玩 (Crossplay)", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpPlatform.Controls.Add(chkCrossplay);
+            grpPlatform.Controls.Add(new Label { Text = "(允许主机玩家加入服务器)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            chkBattleEye = new CheckBox { Text = "启用 BattlEye 反作弊", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpPlatform.Controls.Add(chkBattleEye);
+            grpPlatform.Controls.Add(new Label { Text = "(官方防作弊系统，模组服建议关闭)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            
+            currentY += grpPlatform.Height + 10;
+
+            // 3. 高级服务器指令
+            GroupBox grpCmd = new GroupBox { Text = "高级服务器指令", Left = 10, Top = currentY, Width = 520, Height = 135 };
+            scrollPanel.Controls.Add(grpCmd);
+            innerY = 25;
+
+            chkForceRespawn = new CheckBox { Text = "强制重置野生恐龙", Left = 10, Top = innerY, Width = 220, Checked = false };
+            grpCmd.Controls.Add(chkForceRespawn);
+            grpCmd.Controls.Add(new Label { Text = "(每次启动时清空并重新刷新全图野生龙)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            chkPvE = new CheckBox { Text = "启用 PvE 模式", Left = 10, Top = innerY, Width = 220, Checked = true };
+            grpCmd.Controls.Add(chkPvE);
+            grpCmd.Controls.Add(new Label { Text = "(取消勾选则变为 PvP 模式)", Left = hintLeft, Top = innerY+4, Width = hintWidth, ForeColor = Color.Gray });
+            innerY += rowHeight;
+
+            grpCmd.Controls.Add(new Label { Text = "额外启动参数:", Left = 10, Top = innerY, Width = lblWidth });
+            txtExtraArgs = new TextBox { Left = 120, Top = innerY, Width = txtWidth };
+            grpCmd.Controls.Add(txtExtraArgs);
         }
 
         private void BuildHelpTab(TabPage tab)
